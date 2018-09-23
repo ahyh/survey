@@ -20,7 +20,7 @@
 		<%-- loginUser.compay相当于user.isCompany() --%>
 		<c:if test="${sessionScope.loginUser.userType == 1 }">
 			[<a href="guest/survey/toAdd">创建调查</a>]
-			[<a href="#">我未完成调查</a>]
+			[<a href="guest/survey/showMyUncompleted">我未完成调查</a>]
 		</c:if>
 		
 		<%-- “参与调查”功能无论企业用户还是个人用户都可以访问 --%>

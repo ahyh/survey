@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.survey.dao.SurveyDao">
+    <resultMap id="BaseResultMap" type="Survey">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="survey_no" property="surveyNo" jdbcType="VARCHAR"/>
+        <result column="survey_name" property="surveyName" jdbcType="VARCHAR"/>
+        <result column="survey_status" property="surveyStatus" jdbcType="TINYINT"/>
+        <result column="logo_path" property="logoPath" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="allColumnsWithOutId">
+        (survey_no,survey_name,survey_status,logo_path,username,create_time,update_time,create_user,update_user,is_delete)
+    </sql>
+
+    <sql id="allColumns">
+        id,survey_no,survey_name,survey_status,logo_path,username,create_time,update_time,create_user,update_user,is_delete
+    </sql>
+
+    <!-- 插入方法，插入后返回主键-->
+    <insert id="insert" parameterType="Survey" useGeneratedKeys="true" keyProperty="id">
+        insert into survey
+        <include refid="allColumnsWithOutId"/>
+        values (
+        #{surveyNo,jdbcType=VARCHAR},
+        #{surveyName,jdbcType=VARCHAR},
+        #{surveyStatus,jdbcType=TINYINT},
+        #{logoPath,jdbcType=VARCHAR},
+        #{username,jdbcType=VARCHAR},
+        now(),
+        now(),
+        #{createUser,jdbcType=VARCHAR},
+        #{createUser,jdbcType=VARCHAR},
+        0
+        )
+    </insert>
+
+    <update id="update" parameterType="User">
+        update survey
+        <set>
+            update_time = now(),update_user=#{updateUser,jdbcType=VARCHAR},
+            <trim>
+                <if test="surveyNo != null and surveyNo != ''">
+                    survey_no = #{surveyNo,jdbcType=VARCHAR},
+                </if>
+                <if test="surveyName != null and surveyName != ''">
+                    survey_name = #{surveyName,jdbcType=VARCHAR},
+                </if>
+                <if test="surveyStatus != null">
+                    survey_status = #{surveyStatus,jdbcType=TINYINT},
+                </if>
+                <if test="logoPath != null and logoPath != ''">
+                    logo_path = #{logoPath,jdbcType=VARCHAR},
+                </if>
+                <if test="username != null and username != ''">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+            </trim>
+        </set>
+        where id =#{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        update survey set is_delete = 1,update_time = now() where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <select id="getSurveyByCondition" resultMap="BaseResultMap" parameterType="SurveyCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from survey
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="surveyNo != null and surveyNo != ''">
+                and survey_no = #{surveyNo,jdbcType=VARCHAR}
+            </if>
+            <if test="surveyName != null and surveyName != ''">
+                and survey_name = #{surveyName,jdbcType=VARCHAR}
+            </if>
+            <if test="surveyStatus != null">
+                and survey_status = #{surveyStatus,jdbcType=TINYINT}
+            </if>
+            <if test="logoPath != null and logoPath != ''">
+                and logo_path = #{logoPath,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+        limit 1
+    </select>
+
+    <select id="findSurveyList" resultMap="BaseResultMap" parameterType="SurveyCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from survey
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="surveyNo != null and surveyNo != ''">
+                and survey_no = #{surveyNo,jdbcType=VARCHAR}
+            </if>
+            <if test="surveyName != null and surveyName != ''">
+                and survey_name = #{surveyName,jdbcType=VARCHAR}
+            </if>
+            <if test="surveyStatus != null">
+                and survey_status = #{surveyStatus,jdbcType=TINYINT}
+            </if>
+            <if test="logoPath != null and logoPath != ''">
+                and logo_path = #{logoPath,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+</mapper>

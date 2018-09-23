@@ -35,6 +35,8 @@
                 <prop key="com.yh.survey.exceptions.UserNameAlreadyExistsException">guest/user_register</prop>
                 <prop key="com.yh.survey.exceptions.UserLoginFailedException">guest/user_login</prop>
                 <prop key="com.yh.survey.exceptions.UserNotLoginException">guest/user_login</prop>
+                <prop key="com.yh.survey.exceptions.FileTooLargeException">guest/survey_add</prop>
+                <prop key="com.yh.survey.exceptions.FileTypeInvalidException">guest/survey_add</prop>
             </props>
         </property>
     </bean>

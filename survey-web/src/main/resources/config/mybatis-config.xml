@@ -26,6 +26,12 @@
         <typeAlias alias="SalaryCondition" type="com.yh.survey.domain.condition.SalaryCondition"/>
         <typeAlias alias="User" type="com.yh.survey.domain.pojo.User"/>
         <typeAlias alias="UserCondition" type="com.yh.survey.domain.condition.UserCondition"/>
+        <typeAlias alias="Survey" type="com.yh.survey.domain.pojo.Survey"/>
+        <typeAlias alias="SurveyCondition" type="com.yh.survey.domain.condition.SurveyCondition"/>
+        <typeAlias alias="Bag" type="com.yh.survey.domain.pojo.Bag"/>
+        <typeAlias alias="BagCondition" type="com.yh.survey.domain.condition.BagCondition"/>
+        <typeAlias alias="Question" type="com.yh.survey.domain.pojo.Question"/>
+        <typeAlias alias="QuestionCondition" type="com.yh.survey.domain.condition.QuestionCondition"/>
     </typeAliases>
 
     <plugins>
@@ -44,6 +50,9 @@
     <mappers>
         <mapper resource="mapper/SalaryMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/SurveyMapper.xml"/>
+        <mapper resource="mapper/BagMapper.xml"/>
+        <mapper resource="mapper/QuestionMapper.xml"/>
     </mappers>
 
 </configuration>

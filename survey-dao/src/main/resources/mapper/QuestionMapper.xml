@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.survey.dao.QuestionDao">
+    <resultMap id="BaseResultMap" type="Question">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="question_no" property="questionNo" jdbcType="VARCHAR"/>
+        <result column="question_name" property="questionName" jdbcType="VARCHAR"/>
+        <result column="question_type" property="questionType" jdbcType="TINYINT"/>
+        <result column="question_options" property="questionOptions" jdbcType="VARCHAR"/>
+        <result column="bag_no" property="bagNo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="allColumnsWithOutId">
+        (question_no,question_name,question_type,question_options,bag_no,create_time,update_time,create_user,update_user,is_delete)
+    </sql>
+
+    <sql id="allColumns">
+        id,question_no,question_name,question_type,question_options,bag_no,create_time,update_time,create_user,update_user,is_delete
+    </sql>
+
+    <!-- 插入方法，插入后返回主键-->
+    <insert id="insert" parameterType="Question" useGeneratedKeys="true" keyProperty="id">
+        insert into question
+        <include refid="allColumnsWithOutId"/>
+        values (
+        #{questionNo,jdbcType=VARCHAR},
+        #{questionName,jdbcType=VARCHAR},
+        #{questionType,jdbcType=TINYINT},
+        #{questionOptions,jdbcType=VARCHAR},
+        #{bagNo,jdbcType=VARCHAR},
+        now(),
+        now(),
+        #{createUser,jdbcType=VARCHAR},
+        #{createUser,jdbcType=VARCHAR},
+        0
+        )
+    </insert>
+
+    <update id="update" parameterType="User">
+        update question
+        <set>
+            update_time = now(),update_user=#{updateUser,jdbcType=VARCHAR},
+            <trim>
+                <if test="questionNo != null and questionNo != ''">
+                    question_no = #{questionNo,jdbcType=VARCHAR},
+                </if>
+                <if test="questionName != null and questionName != ''">
+                    question_name = #{questionName,jdbcType=VARCHAR},
+                </if>
+                <if test="questionType != null">
+                    question_type = #{questionType,jdbcType=TINYINT},
+                </if>
+                <if test="questionOptions != null and questionOptions != ''">
+                    question_options = #{questionOptions,jdbcType=VARCHAR},
+                </if>
+                <if test="bagNo != null and bagNo != ''">
+                    bag_no = #{bagNo,jdbcType=VARCHAR},
+                </if>
+            </trim>
+        </set>
+        where id =#{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        update question set is_delete = 1,update_time = now() where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <select id="getQuestionByCondition" resultMap="BaseResultMap" parameterType="QuestionCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from question
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="questionNo != null and questionNo != ''">
+                and question_no = #{questionNo,jdbcType=VARCHAR}
+            </if>
+            <if test="questionName != null and questionName != ''">
+                and question_name = #{questionName,jdbcType=VARCHAR}
+            </if>
+            <if test="questionType != null">
+                and question_type = #{questionType,jdbcType=TINYINT}
+            </if>
+            <if test="questionOptions != null and questionOptions != ''">
+                and question_options = #{questionOptions,jdbcType=VARCHAR}
+            </if>
+            <if test="bagNo != null and bagNo != ''">
+                and bag_no = #{bagNo,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+        limit 1
+    </select>
+
+</mapper>

@@ -15,24 +15,21 @@
 		[显示我未完成的调查]
 		
 		<table class="dataTable">
-		
 			<c:if test="${empty page.list }">
 				<tr>
 					<td>您尚未创建调查！</td>
 				</tr>
 			</c:if>
 			<c:if test="${!empty page.list }">
-				
 				<tr>
 					<td>ID</td>
 					<td>Logo</td>
 					<td>SurveyName</td>
 					<td colspan="4">Operation</td>
 				</tr>
-				
 				<c:forEach items="${page.list }" var="survey">
 					<tr>
-						<td>${survey.surveyId }</td>
+						<td>${survey.id }</td>
 						<td>
 							<img src="${survey.logoPath }"/>
 						</td>
@@ -41,7 +38,7 @@
 							<a href="#">设计</a>
 						</td>
 						<td>
-							<a href="guest/survey/removeSurvey/${survey.surveyId }/${page.pageNo}">删除</a>
+							<a href="guest/survey/removeSurvey/${survey.id }/${page.pageNum }">删除</a>
 						</td>
 						<td>
 							<a href="#">更新</a>
@@ -54,10 +51,8 @@
 				
 				<tr>
 					<td colspan="7">
-						
 						<c:set var="targetUrl" value="guest/survey/showMyUncompleted" scope="page"/>
 						<%@include file="/res_jsp/navigator.jsp" %>
-						
 					</td>
 				</tr>
 				
