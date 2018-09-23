@@ -13,12 +13,12 @@
 	</c:if>
 	<c:if test="${!empty sessionScope.loginUser }">
 		<%-- loginUser.userName相当于user.getUserName() --%>
-		[欢迎您：${sessionScope.loginUser.userName }]
+		[欢迎您：${sessionScope.loginUser.username }]
 		[<a href="guest/user/logout">退出登录</a>]
 		
 		<%-- “创建调查”和“显示我未完成调查”的功能只有企业用户可以访问 --%>
 		<%-- loginUser.compay相当于user.isCompany() --%>
-		<c:if test="${sessionScope.loginUser.company }">
+		<c:if test="${sessionScope.loginUser.userType == 1 }">
 			[<a href="guest/survey/toAdd">创建调查</a>]
 			[<a href="#">我未完成调查</a>]
 		</c:if>

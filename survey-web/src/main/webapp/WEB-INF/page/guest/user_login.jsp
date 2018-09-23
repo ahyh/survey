@@ -16,19 +16,19 @@
 			<table class="formTable">
 				<c:if test="${!empty requestScope.exception }">
 					<tr>
-						<td colspan="2">${requestScope.exception.message }</td>
+						<td colspan="2" style="color: red">${requestScope.exception.message }</td>
 					</tr>
 				</c:if>
 				<tr>
 					<td>用户名</td>
 					<td>
-						<input type="text" name="userName" class="longInput"/>
+						<input type="text" name="username" class="longInput"/>
 					</td>
 				</tr>
 				<tr>
 					<td>密码</td>
 					<td>
-						<input type="password" name="userPwd" class="longInput"/>
+						<input type="password" name="password" class="longInput"/>
 					</td>
 				</tr>
 				<tr>

@@ -16,4 +16,12 @@ public interface UserService {
      * @return 注册结果：true-成功，false-失败
      */
     Boolean register(User user);
+
+    /**
+     * 用户登录
+     *
+     * @param user 前台输入的用户，包含用户名和密码
+     * @return 根据用户名和密码查出来的用户
+     */
+    User login(User user);
 }

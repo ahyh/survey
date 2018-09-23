@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * User控制器
@@ -36,4 +37,16 @@ public class UserController {
         return "/guest/user_login";
     }
 
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public String login(User user, HttpSession httpSession) {
+        User loginUser = userService.login(user);
+        httpSession.setAttribute("loginUser", loginUser);
+        return "redirect:/index.jsp";
+    }
+
+    @RequestMapping(value = "/user/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("loginUser");
+        return "redirect:index.jsp";
+    }
 }
