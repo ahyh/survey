@@ -8,14 +8,13 @@
   <artifactId>survey</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-
     <module>survey-common</module>
     <module>survey-domain</module>
     <module>survey-dao</module>
+    <module>survey-interf</module>
     <module>survey-manager</module>
     <module>survey-service</module>
     <module>survey-web</module>
-    <module>survey-interf</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -447,7 +446,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>pencil</finalName>
+    <finalName>survey</finalName>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <resources>
@@ -502,9 +501,9 @@
         <mvn.jdbc.mysql.password>123456</mvn.jdbc.mysql.password>
         <mvn.log.business.level>DEBUG</mvn.log.business.level>
         <mvn.log.lib.level>DEBUG</mvn.log.lib.level>
-        <mvn.app.name>swim</mvn.app.name>
-        <mvn.domain>swim</mvn.domain>
-        <logs.dir>D://yh-swim</logs.dir>
+        <mvn.app.name>survey</mvn.app.name>
+        <mvn.domain>survey</mvn.domain>
+        <logs.dir>D://yh-survey</logs.dir>
       </properties>
     </profile>
 
@@ -521,9 +520,9 @@
         <mvn.jdbc.mysql.password>123456</mvn.jdbc.mysql.password>
         <mvn.log.business.level>DEBUG</mvn.log.business.level>
         <mvn.log.lib.level>DEBUG</mvn.log.lib.level>
-        <mvn.app.name>swim</mvn.app.name>
-        <mvn.domain>swim</mvn.domain>
-        <logs.dir>D://yh-swim</logs.dir>
+        <mvn.app.name>survey</mvn.app.name>
+        <mvn.domain>survey</mvn.domain>
+        <logs.dir>D://yh-survey</logs.dir>
       </properties>
     </profile>
   </profiles>

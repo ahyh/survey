@@ -7,7 +7,6 @@
 <%@include file="/res_jsp/base.jsp" %>
 </head>
 <body>
-	
 	<%@include file="/res_jsp/guest_top.jsp" %>
 	<div id="mainDiv" class="borderDiv">
 		[用户注册]
@@ -15,19 +14,19 @@
 			<table class="formTable">
 				<c:if test="${!empty requestScope.exception }">
 					<tr>
-						<td colspan="2">${requestScope.exception.message }</td>
+						<td style="color: red" colspan="2">${requestScope.exception.message }</td>
 					</tr>
 				</c:if>
 				<tr>
 					<td>用户名</td>
 					<td>
-						<input type="text" name="userName" class="longInput"/>
+						<input type="text" name="username" class="longInput"/>
 					</td>
 				</tr>
 				<tr>
 					<td>密码</td>
 					<td>
-						<input type="password" name="userPwd" class="longInput"/>
+						<input type="password" name="password" class="longInput"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,10 +38,10 @@
 				<tr>
 					<td>选择用户类别</td>
 					<td>
-						<input id="companyTrue" type="radio" name="company" value="true" checked="checked"/>
+						<input id="companyTrue" type="radio" name="userType" value="1" checked="checked"/>
 						<label for="companyTrue">企业用户</label>
 						
-						<input id="companyFalse" type="radio" name="company" value="false"/>
+						<input id="companyFalse" type="radio" name="userType" value="0"/>
 						<label for="companyFalse">个人用户</label>
 					</td>
 				</tr>

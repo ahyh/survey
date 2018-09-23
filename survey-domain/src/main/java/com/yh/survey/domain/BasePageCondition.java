@@ -1,11 +1,11 @@
 package com.yh.survey.domain;
 
-import java.io.Serializable;
-
 /**
- * Created by yanhuan1 on 2018/1/20.
+ * 带分页的查询条件
+ *
+ * @author yanhuan
  */
-public class BasePageCondition implements Serializable {
+public class BasePageCondition extends BaseDomain {
 
     private int pageNum;
 

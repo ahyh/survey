@@ -7,11 +7,10 @@ import java.math.BigDecimal;
 
 /**
  * 查询条件对象
- * Created by yanhuan1 on 2018/1/16.
+ *
+ * @author yanhuan
  */
 public class SalaryCondition extends BasePageCondition {
-
-    private Long id;
 
     private BigDecimal salary;
 
@@ -20,14 +19,6 @@ public class SalaryCondition extends BasePageCondition {
     private String age;
 
     private Byte sex;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

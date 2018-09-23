@@ -12,7 +12,7 @@ public class User extends BaseDomain {
     /**
      * 用户编号
      */
-    private Integer userNo;
+    private String userNo;
 
     /**
      * 用户名
@@ -29,11 +29,11 @@ public class User extends BaseDomain {
      */
     private Byte userType;
 
-    public Integer getUserNo() {
+    public String getUserNo() {
         return userNo;
     }
 
-    public void setUserNo(Integer userNo) {
+    public void setUserNo(String userNo) {
         this.userNo = userNo;
     }
 

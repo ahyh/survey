@@ -9,6 +9,8 @@ import com.yh.survey.domain.BasePageCondition;
  */
 public class UserCondition extends BasePageCondition {
 
+    private Long id;
+
     /**
      * 用户编号
      */
@@ -27,7 +29,15 @@ public class UserCondition extends BasePageCondition {
     /**
      * 是否企业用户
      */
-    private Byte companyFlag;
+    private Byte userType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Integer getUserNo() {
         return userNo;
@@ -53,11 +63,11 @@ public class UserCondition extends BasePageCondition {
         this.password = password;
     }
 
-    public Byte getCompanyFlag() {
-        return companyFlag;
+    public Byte getUserType() {
+        return userType;
     }
 
-    public void setCompanyFlag(Byte companyFlag) {
-        this.companyFlag = companyFlag;
+    public void setUserType(Byte userType) {
+        this.userType = userType;
     }
 }
