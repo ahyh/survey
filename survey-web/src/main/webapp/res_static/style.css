@@ -1,0 +1,95 @@
+﻿@CHARSET "UTF-8";
+/*==============================声明区=============================*/
+body {
+	margin: 0px auto 0px auto;
+	width: 80%;
+	font-family: 微软雅黑;
+}
+
+a {
+	color: blue;
+	text-decoration: none;
+}
+
+a:HOVER {
+	color: red;
+}
+
+.borderDiv {
+	border: 1px solid black;
+	-moz-border-radius: 15px;      /* Gecko browsers */
+	-webkit-border-radius: 15px;   /* Webkit browsers */
+	border-radius:15px;            /* W3C syntax */
+}
+
+.formTable {
+	width: 600px;
+	margin: 0px auto 0px auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.formTable td {
+	border: 1px solid black;
+}
+
+.longInput {
+	border: 1px solid black;
+	width: 200px;
+	text-align: center;
+}
+
+.multiInput {
+	border: 1px solid black;
+	width: 200px;
+	height: 80px;
+}
+
+.shortInput {
+	border: 1px solid black;
+	width: 50px;
+}
+
+.dataTable {
+	border: 1px dashed black;
+	width: 100%;
+	-moz-border-radius: 15px;      /* Gecko browsers */
+	-webkit-border-radius: 15px;   /* Webkit browsers */
+	border-radius:15px;            /* W3C syntax */
+}
+
+.dataTable td {
+	border: 1px dashed black;
+	-moz-border-radius: 15px;      /* Gecko browsers */
+	-webkit-border-radius: 15px;   /* Webkit browsers */
+	border-radius:15px;            /* W3C syntax */
+}
+
+.text_left {
+	text-align: left;
+}
+
+/*==============================定制区=============================*/
+#topDiv {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#logoDiv {
+	text-align: center;
+	font-size: 40px;
+	padding: 10px;
+}
+
+#bottomDiv {
+	text-align: center;
+}
+
+#mainDiv {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	height: 100%;
+	text-align: center;
+}
