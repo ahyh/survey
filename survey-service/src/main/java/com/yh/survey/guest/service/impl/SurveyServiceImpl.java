@@ -59,4 +59,10 @@ public class SurveyServiceImpl implements SurveyService {
         Preconditions.checkNotNull(survey);
         return surveyDao.update(survey);
     }
+
+    @Override
+    public Survey getSurveyWithBagAndQuestions(Long id) {
+        Preconditions.checkNotNull(id);
+        return surveyDao.getSurveyWithBagAndQuestions(id);
+    }
 }

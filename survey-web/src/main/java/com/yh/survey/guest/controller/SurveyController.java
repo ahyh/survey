@@ -7,6 +7,8 @@ import com.yh.survey.domain.pojo.Survey;
 import com.yh.survey.domain.pojo.User;
 import com.yh.survey.exceptions.FileTooLargeException;
 import com.yh.survey.exceptions.FileTypeInvalidException;
+import com.yh.survey.exceptions.UpdateFileTooLargeException;
+import com.yh.survey.exceptions.UpdateFileTypeInvalidException;
 import com.yh.survey.guest.interf.SurveyService;
 import com.yh.survey.utils.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -126,7 +128,6 @@ public class SurveyController {
     @RequestMapping("/updateSurvey")
     public String updateSurvey(Survey survey, @RequestParam("logoFile") MultipartFile logoFile,
                                HttpSession session, HttpServletRequest request, @RequestParam("pageNum") Integer pageNum) throws IOException {
-
         //1.判断用户是否真的上传了文件
         boolean empty = logoFile.isEmpty();
         if (!empty) {
@@ -134,13 +135,13 @@ public class SurveyController {
             long size = logoFile.getSize();
             if (size > 1024000) {
                 request.setAttribute("survey", survey);
-                throw new FileTooLargeException(ExceptionMessage.FILE_TOO_LARGE);
+                throw new UpdateFileTooLargeException(ExceptionMessage.FILE_TOO_LARGE);
             }
             //ii.文件类型验证
             String contentType = logoFile.getContentType();
             if (!contentType.startsWith("image/")) {
                 request.setAttribute("survey", survey);
-                throw new FileTypeInvalidException(ExceptionMessage.FILE_TYPE_INVALIDE);
+                throw new UpdateFileTypeInvalidException(ExceptionMessage.FILE_TYPE_INVALIDE);
             }
             //2.通过Session对象获取ServletContext
             ServletContext servletContext = session.getServletContext();

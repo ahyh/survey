@@ -15,6 +15,45 @@
         <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
+    <resultMap id="SurveyWithBagAndQuestionsMap" type="Survey">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="survey_no" property="surveyNo" jdbcType="VARCHAR"/>
+        <result column="survey_name" property="surveyName" jdbcType="VARCHAR"/>
+        <result column="survey_status" property="surveyStatus" jdbcType="TINYINT"/>
+        <result column="logo_path" property="logoPath" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+        <collection property="bagSet" column="bag_id" ofType="Bag">
+            <result column="bag_id" property="id" jdbcType="BIGINT"/>
+            <result column="bag_no" property="bagNo" jdbcType="VARCHAR"/>
+            <result column="bag_name" property="bagName" jdbcType="VARCHAR"/>
+            <result column="bag_order" property="bagOrder" jdbcType="INTEGER"/>
+            <result column="survey_id" property="surveyId" jdbcType="BIGINT"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+            <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+            <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+            <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+            <collection property="questionSet" column="question_id" ofType="Question">
+                <result column="question_id" property="id" jdbcType="BIGINT"/>
+                <result column="question_no" property="questionNo" jdbcType="VARCHAR"/>
+                <result column="question_name" property="questionName" jdbcType="VARCHAR"/>
+                <result column="question_type" property="questionType" jdbcType="TINYINT"/>
+                <result column="question_options" property="questionOptions" jdbcType="VARCHAR"/>
+                <result column="bag_id" property="bagId" jdbcType="BIGINT"/>
+                <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+                <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+                <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+                <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+                <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+            </collection>
+        </collection>
+    </resultMap>
+
     <sql id="allColumnsWithOutId">
         (survey_no,survey_name,survey_status,logo_path,username,create_time,update_time,create_user,update_user,is_delete)
     </sql>
@@ -137,6 +176,22 @@
                 </otherwise>
             </choose>
         </where>
+    </select>
+
+    <select id="getSurveyWithBagAndQuestions" parameterType="java.lang.Long" resultMap="SurveyWithBagAndQuestionsMap">
+        select
+        s.id,s.survey_no,s.survey_name,s.survey_status,s.logo_path,
+        s.username,s.create_time,s.update_time,s.create_user,s.update_user,s.is_delete,
+        b.id as bag_id,b.bag_no,b.bag_name,b.bag_order,b.survey_id,
+        b.create_time,b.update_time,b.create_user,b.update_user,b.is_delete,
+        q.id as question_id,q.question_no,q.question_name,q.question_type,q.question_options,
+        q.bag_id,q.create_time,q.update_time,q.create_user,q.update_user,q.is_delete
+        from survey s left join bag b on s.id = b.survey_id
+        left join question q on b.id = q.bag_id
+        where s.id = #{id,jdbcType=BIGINT}
+        and s.is_delete = 0
+        and b.is_delete = 0
+        and q.is_delete = 0
     </select>
 
 </mapper>

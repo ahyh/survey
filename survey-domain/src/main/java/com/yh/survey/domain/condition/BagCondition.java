@@ -15,7 +15,7 @@ public class BagCondition extends BasePageCondition {
 
     private Integer bagOrder;
 
-    private String surveyNo;
+    private Long surveyId;
 
     public String getBagNo() {
         return bagNo;
@@ -41,11 +41,11 @@ public class BagCondition extends BasePageCondition {
         this.bagOrder = bagOrder;
     }
 
-    public String getSurveyNo() {
-        return surveyNo;
+    public Long getSurveyId() {
+        return surveyId;
     }
 
-    public void setSurveyNo(String surveyNo) {
-        this.surveyNo = surveyNo;
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
     }
 }

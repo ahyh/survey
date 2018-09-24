@@ -18,8 +18,6 @@
 			<form:hidden path="logoPath"/>
 			
 			<!-- form:hidden只能用于实体类对象的属性，其他属性不可以使用 -->
-			<%-- <form:hidden path="pageNo"/> --%>
-			
 			<input type="hidden" name="pageNum" value="${requestScope.pageNum }"/>
 			
 			<table class="formTable">

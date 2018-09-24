@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="trace" monitorInterval="3600">
     <properties>
-        <property name="log_home">D:javalog/export/Logs/${mvn.app.name}.${mvn.domain}</property>
+        <property name="log_home">D:/javalog/export/Logs/${mvn.app.name}.${mvn.domain}</property>
         <property name="business_log_size">100MB</property>
         <property name="business_log_file_count">5</property>
         <property name="business_log_level">${mvn.log.business.level}</property>

@@ -11,14 +11,29 @@ import java.util.LinkedHashSet;
  */
 public class Bag extends BaseDomain {
 
+    /**
+     * 包裹编号
+     */
     private String bagNo;
 
+    /**
+     * 包裹名称
+     */
     private String bagName;
 
+    /**
+     * 包裹序号
+     */
     private Integer bagOrder;
 
-    private String surveyNo;
+    /**
+     * 所属调查编号
+     */
+    private Long surveyId;
 
+    /**
+     * 包裹中问题集合
+     */
     private LinkedHashSet<Question> questionSet;
 
     public String getBagNo() {
@@ -45,12 +60,12 @@ public class Bag extends BaseDomain {
         this.bagOrder = bagOrder;
     }
 
-    public String getSurveyNo() {
-        return surveyNo;
+    public Long getSurveyId() {
+        return surveyId;
     }
 
-    public void setSurveyNo(String surveyNo) {
-        this.surveyNo = surveyNo;
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
     }
 
     public LinkedHashSet<Question> getQuestionSet() {

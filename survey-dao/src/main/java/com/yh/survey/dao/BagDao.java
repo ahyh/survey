@@ -12,4 +12,12 @@ public interface BagDao {
     Integer delete(Long id);
 
     Bag getBagByCondition(BagCondition condition);
+
+    /**
+     * 根据bagId获取Bag对象，包含bag下的所有Question
+     *
+     * @param bagId 包裹ID
+     * @return Bag对象，包含Question
+     */
+    Bag getBagWithQuestions(Long bagId);
 }

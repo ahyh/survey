@@ -24,11 +24,18 @@
     <typeAliases>
         <typeAlias alias="Salary" type="com.yh.survey.domain.pojo.Salary"/>
         <typeAlias alias="SalaryCondition" type="com.yh.survey.domain.condition.SalaryCondition"/>
+        <typeAlias alias="User" type="com.yh.survey.domain.pojo.User"/>
+        <typeAlias alias="UserCondition" type="com.yh.survey.domain.condition.UserCondition"/>
+        <typeAlias alias="Survey" type="com.yh.survey.domain.pojo.Survey"/>
+        <typeAlias alias="SurveyCondition" type="com.yh.survey.domain.condition.SurveyCondition"/>
+        <typeAlias alias="Bag" type="com.yh.survey.domain.pojo.Bag"/>
+        <typeAlias alias="BagCondition" type="com.yh.survey.domain.condition.BagCondition"/>
+        <typeAlias alias="Question" type="com.yh.survey.domain.pojo.Question"/>
+        <typeAlias alias="QuestionCondition" type="com.yh.survey.domain.condition.QuestionCondition"/>
     </typeAliases>
 
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageHelper">
-            <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
             <property name="dialect" value="mysql"/>
             <property name="offsetAsPageNum" value="false"/>
             <property name="rowBoundsWithCount" value="false"/>
@@ -42,6 +49,10 @@
     <!-- mapper文件 -->
     <mappers>
         <mapper resource="mapper/SalaryMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/SurveyMapper.xml"/>
+        <mapper resource="mapper/BagMapper.xml"/>
+        <mapper resource="mapper/QuestionMapper.xml"/>
     </mappers>
 
 </configuration>

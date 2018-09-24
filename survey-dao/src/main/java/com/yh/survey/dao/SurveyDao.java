@@ -17,4 +17,12 @@ public interface SurveyDao {
 
     List<Survey> findSurveyList(SurveyCondition condition);
 
+    /**
+     * 根据Survey的id获取Survey对象，包含所有的包裹和问题
+     *
+     * @param id survey表的id
+     * @return 包含包裹和问题的Survey对象
+     */
+    Survey getSurveyWithBagAndQuestions(Long id);
+
 }

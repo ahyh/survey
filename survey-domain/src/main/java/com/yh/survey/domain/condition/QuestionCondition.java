@@ -17,7 +17,7 @@ public class QuestionCondition extends BasePageCondition {
 
     private String questionOptions;
 
-    private String bagNo;
+    private Long bagId;
 
     public String getQuestionNo() {
         return questionNo;
@@ -51,11 +51,11 @@ public class QuestionCondition extends BasePageCondition {
         this.questionOptions = questionOptions;
     }
 
-    public String getBagNo() {
-        return bagNo;
+    public Long getBagId() {
+        return bagId;
     }
 
-    public void setBagNo(String bagNo) {
-        this.bagNo = bagNo;
+    public void setBagId(Long bagId) {
+        this.bagId = bagId;
     }
 }
