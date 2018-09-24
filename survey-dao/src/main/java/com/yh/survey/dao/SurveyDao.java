@@ -9,7 +9,7 @@ public interface SurveyDao {
 
     Integer insert(Survey user);
 
-    Integer update(Survey salary);
+    Integer update(Survey survey);
 
     Integer delete(Long id);
 

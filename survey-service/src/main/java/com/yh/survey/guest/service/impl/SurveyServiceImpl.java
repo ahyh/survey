@@ -47,4 +47,16 @@ public class SurveyServiceImpl implements SurveyService {
         Preconditions.checkNotNull(id);
         return surveyDao.delete(id);
     }
+
+    @Override
+    public Survey getSurveyByCondition(SurveyCondition condition) {
+        Preconditions.checkNotNull(condition);
+        return surveyDao.getSurveyByCondition(condition);
+    }
+
+    @Override
+    public Integer updateSurvey(Survey survey) {
+        Preconditions.checkNotNull(survey);
+        return surveyDao.update(survey);
+    }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,6 +111,52 @@ public class SurveyController {
     @RequestMapping("/removeSurvey/{id}/{pageNum}")
     public String removeSurvey(@PathVariable("id") Long id, @PathVariable("pageNum") Integer pageNum) {
         surveyService.removeSurvey(id);
+        return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
+    }
+
+    @RequestMapping("/toEdit/{id}/{pageNum}")
+    public String toEdit(@PathVariable("id") Long id, @PathVariable("pageNum") Integer pageNum, Map<String, Object> map) {
+        SurveyCondition condition = new SurveyCondition();
+        condition.setId(id);
+        Survey survey = surveyService.getSurveyByCondition(condition);
+        map.put("survey", survey);
+        return "guest/survey_edit";
+    }
+
+    @RequestMapping("/updateSurvey")
+    public String updateSurvey(Survey survey, @RequestParam("logoFile") MultipartFile logoFile,
+                               HttpSession session, HttpServletRequest request, @RequestParam("pageNum") Integer pageNum) throws IOException {
+
+        //1.判断用户是否真的上传了文件
+        boolean empty = logoFile.isEmpty();
+        if (!empty) {
+            //i.文件大小验证
+            long size = logoFile.getSize();
+            if (size > 1024000) {
+                request.setAttribute("survey", survey);
+                throw new FileTooLargeException(ExceptionMessage.FILE_TOO_LARGE);
+            }
+            //ii.文件类型验证
+            String contentType = logoFile.getContentType();
+            if (!contentType.startsWith("image/")) {
+                request.setAttribute("survey", survey);
+                throw new FileTypeInvalidException(ExceptionMessage.FILE_TYPE_INVALIDE);
+            }
+            //2.通过Session对象获取ServletContext
+            ServletContext servletContext = session.getServletContext();
+            //3.声明虚拟路径
+            String virtualPath = "/surveyLogos";
+            //4.根据虚拟路径生成真实路径
+            String realPath = servletContext.getRealPath(virtualPath);
+            //5.获取上传文件的输入流
+            InputStream inputStream = logoFile.getInputStream();
+            //6.压缩图片
+            String logoPath = ImageUtil.resizeImages(inputStream, realPath);
+            //7.使用这个logoPath值设置survey对象中的logoPath属性
+            survey.setLogoPath(logoPath);
+        }
+        survey.setUpdateUser(((User) session.getAttribute("loginUser")).getUsername());
+        surveyService.updateSurvey(survey);
         return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
     }
 }

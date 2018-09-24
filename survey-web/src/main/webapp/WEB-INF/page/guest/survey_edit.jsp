@@ -14,13 +14,13 @@
 	<div id="mainDiv" class="borderDiv">
 		[编辑调查]
 		<form:form action="guest/survey/updateSurvey" method="post" modelAttribute="survey" enctype="multipart/form-data">
-			<form:hidden path="surveyId"/>
+			<form:hidden path="id"/>
 			<form:hidden path="logoPath"/>
 			
 			<!-- form:hidden只能用于实体类对象的属性，其他属性不可以使用 -->
 			<%-- <form:hidden path="pageNo"/> --%>
 			
-			<input type="hidden" name="pageNo" value="${requestScope.pageNo }"/>
+			<input type="hidden" name="pageNum" value="${requestScope.pageNum }"/>
 			
 			<table class="formTable">
 				<c:if test="${!empty requestScope.exception }">

@@ -11,4 +11,8 @@ public interface SurveyService {
     PageInfo<Survey> findSurveyPage(SurveyCondition condition);
 
     Integer removeSurvey(Long id);
+
+    Survey getSurveyByCondition(SurveyCondition condition);
+
+    Integer updateSurvey(Survey survey);
 }
