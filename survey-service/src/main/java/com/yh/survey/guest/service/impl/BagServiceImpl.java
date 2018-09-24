@@ -6,6 +6,7 @@ import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.guest.interf.BagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -36,5 +37,27 @@ public class BagServiceImpl implements BagService {
     public Bag getBagByCondition(BagCondition condition) {
         Preconditions.checkNotNull(condition);
         return bagDao.getBagByCondition(condition);
+    }
+
+    @Override
+    @Transactional
+    public Integer saveBag(Bag bag) {
+        Preconditions.checkNotNull(bag);
+        bagDao.insert(bag);
+        bag.setBagOrder(Integer.valueOf(bag.getId().toString()));
+        bag.setUpdateUser(bag.getCreateUser());
+        return bagDao.update(bag);
+    }
+
+    @Override
+    public Integer removeBag(Long bagId) {
+        Preconditions.checkNotNull(bagId);
+        return bagDao.delete(bagId);
+    }
+
+    @Override
+    public Integer updateBag(Bag bag) {
+        Preconditions.checkNotNull(bag);
+        return bagDao.update(bag);
     }
 }

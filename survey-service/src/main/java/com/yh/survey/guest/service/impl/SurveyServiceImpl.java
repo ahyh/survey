@@ -5,11 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import com.yh.survey.dao.SurveyDao;
 import com.yh.survey.domain.condition.SurveyCondition;
+import com.yh.survey.domain.pojo.Bag;
+import com.yh.survey.domain.pojo.Question;
 import com.yh.survey.domain.pojo.Survey;
 import com.yh.survey.guest.interf.SurveyService;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -63,6 +68,18 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public Survey getSurveyWithBagAndQuestions(Long id) {
         Preconditions.checkNotNull(id);
-        return surveyDao.getSurveyWithBagAndQuestions(id);
+        Survey survey = surveyDao.getSurveyWithBagAndQuestions(id);
+        LinkedHashSet<Bag> bagSet = survey.getBagSet();
+        for (Bag bag : bagSet) {
+            LinkedHashSet<Question> questionSet = bag.getQuestionSet();
+            if (CollectionUtils.isNotEmpty(questionSet) && questionSet.size() == 1) {
+                for (Question question : questionSet) {
+                    if (StringUtils.isBlank(question.getQuestionName()) || question.getIsDelete().equals(new Byte("0"))) {
+                        bag.setQuestionSet(null);
+                    }
+                }
+            }
+        }
+        return survey;
     }
 }

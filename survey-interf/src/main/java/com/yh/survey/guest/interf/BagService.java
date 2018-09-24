@@ -17,4 +17,10 @@ public interface BagService {
     Bag getBagWithQuestions(Long bagId);
 
     Bag getBagByCondition(BagCondition condition);
+
+    Integer saveBag(Bag bag);
+
+    Integer removeBag(Long bagId);
+
+    Integer updateBag(Bag bag);
 }

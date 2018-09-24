@@ -11,37 +11,28 @@
 		
 		//1.在文档加载完成时，将选项所在的行隐藏
 		$("#optionsTr").hide();
-		
 		//2.获取题型的单选按钮并绑定单击响应函数
 		$(":radio").click(function(){
-			
 			//3.获取当前单选按钮的value属性值
 			var type = this.value;//$(this).val()
-			
 			//4.判断type是否是0或1
 			if(type == 0 || type == 1) {
 				//单选题或多选题显示
 				$("#optionsTr").show();
 			}
-			
 			if(type == 2) {
 				//简答题隐藏
 				$("#optionsTr").hide();
 			}
-			
 		});
 		
 		//3.过滤选项文本框中输入的数据
 		$("textarea").change(function(){
-			
 			//获取当前输入的数据
 			var options = this.value;
-			
 			//去除前后空格
 			this.value = $.trim(options);
-			
 		});
-		
 	});
 	
 </script>
@@ -54,7 +45,6 @@
 		[创建问题]
 		
 		<form action="guest/question/saveQuestion" method="post">
-		
 			<input type="hidden" name="bagId" value="${requestScope.bagId }"/>
 			<input type="hidden" name="surveyId" value="${requestScope.surveyId }"/>
 		

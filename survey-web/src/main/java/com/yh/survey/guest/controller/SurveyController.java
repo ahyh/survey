@@ -73,7 +73,6 @@ public class SurveyController {
             survey.setLogoPath(logoPath);
         }
         User user = (User) session.getAttribute("loginUser");
-        //todo 后续考虑从redis中获取
         survey.setSurveyNo(UUID.randomUUID().toString());
         survey.setUsername(user.getUsername());
         survey.setCreateTime(new Date());
@@ -159,5 +158,19 @@ public class SurveyController {
         survey.setUpdateUser(((User) session.getAttribute("loginUser")).getUsername());
         surveyService.updateSurvey(survey);
         return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
+    }
+
+    /**
+     * 跳转到调查设计页面
+     *
+     * @param surveyId survey表的id
+     * @param map      域对象
+     * @return 跳转到调查设计页面
+     */
+    @RequestMapping("/toDesign/{surveyId}")
+    public String toDesign(@PathVariable("surveyId") Long surveyId, Map<String, Object> map) {
+        Survey survey = surveyService.getSurveyWithBagAndQuestions(surveyId);
+        map.put("survey", survey);
+        return "guest/survey_design";
     }
 }

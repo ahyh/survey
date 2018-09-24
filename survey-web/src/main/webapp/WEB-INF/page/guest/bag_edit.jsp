@@ -14,8 +14,7 @@
 	<div id="mainDiv" class="borderDiv">
 		[更新包裹]
 		<form:form action="guest/bag/updateBag" method="post" modelAttribute="bag">
-			
-			<form:hidden path="bagId"/>
+			<form:hidden path="id"/>
 			<form:hidden path="surveyId"/>
 			
 			<table class="formTable">
