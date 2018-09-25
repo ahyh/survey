@@ -114,7 +114,7 @@
 											</td>
 											<td>
 												<a href="guest/question/removeQuestion/${question.id }/${survey.id}">删除问题</a>
-												<a href="guest/question/toEditUI/${question.id }/${survey.id}">更新问题</a>
+												<a href="guest/question/toEdit/${question.id }/${survey.id}">更新问题</a>
 											</td>
 										</tr>
 									</c:forEach>

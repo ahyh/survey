@@ -7,7 +7,7 @@ public interface QuestionDao {
 
     Integer insert(Question question);
 
-    Integer update(Question salary);
+    Integer update(Question question);
 
     Integer delete(Long id);
 

@@ -2,6 +2,7 @@ package com.yh.survey.guest.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.yh.survey.dao.QuestionDao;
+import com.yh.survey.domain.condition.QuestionCondition;
 import com.yh.survey.domain.pojo.Question;
 import com.yh.survey.guest.interf.QuestionService;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,17 @@ public class QuestionServiceImpl implements QuestionService {
     public Integer removeQuestion(Long questionId) {
         Preconditions.checkNotNull(questionId);
         return questionDao.delete(questionId);
+    }
+
+    @Override
+    public Question getQuestionByCondition(QuestionCondition condition) {
+        Preconditions.checkNotNull(condition);
+        return questionDao.getQuestionByCondition(condition);
+    }
+
+    @Override
+    public Integer updateQuestion(Question question) {
+        Preconditions.checkNotNull(question);
+        return questionDao.update(question);
     }
 }

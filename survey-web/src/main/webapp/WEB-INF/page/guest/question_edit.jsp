@@ -12,29 +12,22 @@
 		//1.获取文档刚刚初始化完成时，被选中的题型
 		//被选中的单选按钮的value属性值
 		var type = $(":radio:checked").val();
-		
 		//2.如果被选中的题型是简答题，那么就隐藏选项所在行
 		if(type == 2) {
 			$("#optionsTr").hide();
 		}
-		
 		//3.给单选按钮绑定单击响应函数，根据选中的不同题型切换选项行的显示状态
 		$(":radio").click(function(){
-			
 			var type = this.value;//$(this).val()
-			
 			if(type == 0 || type == 1) {
 				$("#optionsTr").show();
 			}
-			
 			if(type == 2) {
 				$("#optionsTr").hide();
 			}
-			
 		});
 	});
-	
-	
+
 </script>
 </head>
 <body>
@@ -46,7 +39,7 @@
 		
 		<form:form action="guest/question/updateQuestion" method="post" modelAttribute="question">
 		
-			<form:hidden path="questionId"/>
+			<form:hidden path="id"/>
 			
 			<input type="hidden" name="surveyId" value="${requestScope.surveyId }"/>
 			
