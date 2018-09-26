@@ -80,8 +80,8 @@ public class SurveyServiceImpl implements SurveyService {
                     }
                 }
             }
-            if (CollectionUtils.isNotEmpty(questionSet)) {
-                Iterator<Question> iterator = questionSet.iterator();
+            if (CollectionUtils.isNotEmpty(bag.getQuestionSet())) {
+                Iterator<Question> iterator = bag.getQuestionSet().iterator();
                 while (iterator.hasNext()) {
                     Question next = iterator.next();
                     if (next.getIsDelete().equals(new Byte("1"))) {

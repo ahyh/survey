@@ -9,7 +9,7 @@ public interface BagDao {
 
     Integer update(Bag salary);
 
-    Integer delete(Long id);
+    Integer delete(BagCondition condition);
 
     Bag getBagByCondition(BagCondition condition);
 

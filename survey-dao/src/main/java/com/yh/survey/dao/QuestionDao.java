@@ -14,4 +14,6 @@ public interface QuestionDao {
     Question getQuestionByCondition(QuestionCondition condition);
 
     Integer queryQuestionNumByBagId(Long bagId);
+
+    Integer deleteByCondition(QuestionCondition questionCondition);
 }

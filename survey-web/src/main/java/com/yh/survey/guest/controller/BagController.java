@@ -8,6 +8,8 @@ import com.yh.survey.domain.pojo.User;
 import com.yh.survey.exceptions.RemoveBagFailedException;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.guest.interf.QuestionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/guest/bag")
 public class BagController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BagController.class);
 
     @Resource
     private BagService bagService;
@@ -67,13 +71,35 @@ public class BagController {
     }
 
     @RequestMapping("/removeBag/{bagId}/{surveyId}")
-    public String removeBag(@PathVariable("bagId") Long bagId, @PathVariable("surveyId") Long surveyId) {
+    public String removeBag(@PathVariable("bagId") Long bagId, @PathVariable("surveyId") Long surveyId,HttpSession session) {
         Preconditions.checkNotNull(bagId);
+        User user = (User)session.getAttribute("loginUser");
         Integer questionNum = questionService.queryQuestionNumByBagId(bagId);
-        if(questionNum != null && questionNum > 0){
+        if (questionNum != null && questionNum > 0) {
             throw new RemoveBagFailedException(ExceptionMessage.REMOVE_BAG_FAILED);
         }
-        bagService.removeBag(bagId);
+        BagCondition condition = new BagCondition();
+        condition.setId(bagId);
+        condition.setUpdateUser(user.getUsername());
+        bagService.removeBag(condition);
+        return "redirect:/guest/survey/toDesign/" + surveyId;
+    }
+
+    @RequestMapping("/removeBagDeeply/{bagId}/{surveyId}")
+    public String removeBagDeeply(@PathVariable("bagId") Long bagId,
+                                  @PathVariable("surveyId") Long surveyId,
+                                  HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("loginUser");
+            Preconditions.checkNotNull(bagId);
+            BagCondition condition = new BagCondition();
+            condition.setId(bagId);
+            condition.setUpdateUser(user.getUsername());
+            bagService.removeBagWithQuestions(condition);
+        } catch (Exception e) {
+            logger.error("BagController removeBagDeeply error:{}", e);
+            throw new RemoveBagFailedException(ExceptionMessage.REMOVE_BAG_FAILED);
+        }
         return "redirect:/guest/survey/toDesign/" + surveyId;
     }
 

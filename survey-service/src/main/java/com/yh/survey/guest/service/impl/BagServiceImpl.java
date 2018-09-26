@@ -5,6 +5,8 @@ import com.yh.survey.dao.BagDao;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.guest.interf.BagService;
+import com.yh.survey.manager.BagManager;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,9 @@ public class BagServiceImpl implements BagService {
 
     @Resource
     private BagDao bagDao;
+
+    @Resource
+    private BagManager bagManager;
 
     /**
      * 级联查询出Bag对象
@@ -50,9 +55,9 @@ public class BagServiceImpl implements BagService {
     }
 
     @Override
-    public Integer removeBag(Long bagId) {
-        Preconditions.checkNotNull(bagId);
-        return bagDao.delete(bagId);
+    public Integer removeBag(BagCondition condition) {
+        Preconditions.checkNotNull(condition);
+        return bagDao.delete(condition);
     }
 
     @Override
@@ -65,5 +70,13 @@ public class BagServiceImpl implements BagService {
     public Integer queryBagNumBySurveyId(Long surveyId) {
         Preconditions.checkNotNull(surveyId);
         return bagDao.queryBagNumBySurveyId(surveyId);
+    }
+
+    @Override
+    public Boolean removeBagWithQuestions(BagCondition condition) {
+        Preconditions.checkNotNull(condition);
+        Preconditions.checkArgument(condition.getId() != null, "bagId cannot null!");
+        Preconditions.checkArgument(StringUtils.isNotBlank(condition.getUpdateUser()), "updateUser cannot null!");
+        return bagManager.removeBagWithQuestions(condition);
     }
 }

@@ -87,8 +87,9 @@
         where id =#{id,jdbcType=BIGINT}
     </update>
 
-    <delete id="delete" parameterType="java.lang.Long">
-        update bag set is_delete = 1,update_time = now() where id = #{id,jdbcType=BIGINT}
+    <delete id="delete" parameterType="BagCondition">
+        update bag set is_delete = 1,update_time = now(),
+        update_user = #{updateUser,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
     </delete>
 
     <select id="getBagByCondition" resultMap="BaseResultMap" parameterType="BagCondition" useCache="true">

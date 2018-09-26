@@ -110,4 +110,10 @@
         where bag_id = #{bagId,jdbcType=BIGINT} and is_delete = 0
     </select>
 
+    <update id="deleteByCondition" parameterType="QuestionCondition">
+        update question set is_delete = 1,update_time = now(),
+        update_user = #{updateUser,jdbcType=VARCHAR}
+        where bag_id = #{bagId,jdbcType=BIGINT}
+    </update>
+
 </mapper>

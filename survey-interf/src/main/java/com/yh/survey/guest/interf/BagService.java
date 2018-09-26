@@ -20,7 +20,13 @@ public interface BagService {
 
     Integer saveBag(Bag bag);
 
-    Integer removeBag(Long bagId);
+    /**
+     * 删除包裹，如果包裹下没有问题则可以直接删除，否则提示失败
+     *
+     * @param condition 包裹id,updateUser信息
+     * @return 删除包裹受影响的行数
+     */
+    Integer removeBag(BagCondition condition);
 
     Integer updateBag(Bag bag);
 
@@ -31,4 +37,12 @@ public interface BagService {
      * @return 调查下包裹数量
      */
     Integer queryBagNumBySurveyId(Long surveyId);
+
+    /**
+     * 删除包裹及包裹下所有问题
+     *
+     * @param condition 包含bagId，updateUser信息
+     * @return 是否成功删除
+     */
+    Boolean removeBagWithQuestions(BagCondition condition);
 }
