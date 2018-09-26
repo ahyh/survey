@@ -70,6 +70,10 @@ public class SurveyServiceImpl implements SurveyService {
     public Survey getSurveyWithBagAndQuestions(Long id) {
         Preconditions.checkNotNull(id);
         Survey survey = surveyDao.getSurveyWithBagAndQuestions(id);
+        Preconditions.checkNotNull(survey);
+        if(CollectionUtils.isEmpty(survey.getBagSet())){
+            return survey;
+        }
         LinkedHashSet<Bag> bagSet = survey.getBagSet();
         for (Bag bag : bagSet) {
             LinkedHashSet<Question> questionSet = bag.getQuestionSet();
@@ -91,5 +95,36 @@ public class SurveyServiceImpl implements SurveyService {
             }
         }
         return survey;
+    }
+
+    @Override
+    public Integer updateSurveyComplete(Survey survey) {
+        Preconditions.checkNotNull(survey);
+        Survey tempSurvey = surveyDao.getSurveyWithBagAndQuestions(survey.getId());
+        if (tempSurvey == null) {
+            throw new RuntimeException("survey cannot null");
+        }
+        if (CollectionUtils.isEmpty(tempSurvey.getBagSet())) {
+            throw new RuntimeException("survey has no bagSet");
+        }
+        Integer deleteQuestionNum;
+        for (Bag bag : tempSurvey.getBagSet()) {
+            if (CollectionUtils.isEmpty(bag.getQuestionSet())) {
+                throw new RuntimeException("bag has no questionSet");
+            }
+            deleteQuestionNum = 0;
+            for (Question question : bag.getQuestionSet()) {
+                if (StringUtils.isBlank(question.getQuestionName())) {
+                    throw new RuntimeException("questionName cannot blank");
+                }
+                if (question.getIsDelete().equals(new Byte("1"))) {
+                    deleteQuestionNum++;
+                }
+            }
+            if (deleteQuestionNum == bag.getQuestionSet().size()) {
+                throw new RuntimeException("all question deleted");
+            }
+        }
+        return surveyDao.update(survey);
     }
 }

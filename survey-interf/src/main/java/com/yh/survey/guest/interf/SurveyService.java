@@ -23,4 +23,6 @@ public interface SurveyService {
      * @return 包含Bag和Question的Survey对象
      */
     Survey getSurveyWithBagAndQuestions(Long id);
+
+    Integer updateSurveyComplete(Survey survey);
 }

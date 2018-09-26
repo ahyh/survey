@@ -6,11 +6,14 @@ import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.SurveyCondition;
 import com.yh.survey.domain.pojo.Survey;
 import com.yh.survey.domain.pojo.User;
+import com.yh.survey.enums.SurveyStatusEnum;
 import com.yh.survey.exceptions.*;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.guest.interf.SurveyService;
 import com.yh.survey.utils.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/guest/survey")
 public class SurveyController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SurveyController.class);
 
     @Resource
     private SurveyService surveyService;
@@ -179,5 +184,28 @@ public class SurveyController {
         Survey survey = surveyService.getSurveyWithBagAndQuestions(surveyId);
         map.put("survey", survey);
         return "guest/survey_design";
+    }
+
+    /**
+     * 更新调查的状态为完成
+     *
+     * @param surveyId survey表的主键
+     * @param session  session对象
+     * @return 更新完成后返回至首页
+     */
+    @RequestMapping("/complete/{surveyId}")
+    public String complete(@PathVariable("surveyId") Long surveyId, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("loginUser");
+            Survey survey = new Survey();
+            survey.setId(surveyId);
+            survey.setUpdateUser(user.getUsername());
+            survey.setSurveyStatus(SurveyStatusEnum.COMPLETED.getKey());
+            surveyService.updateSurveyComplete(survey);
+            return "redirect:/index.jsp";
+        } catch (Exception e) {
+            logger.error("SurveyController complete error:{}", e);
+            throw new CompleteSurveyException(ExceptionMessage.COMPLETE_SURVEY_FAILED);
+        }
     }
 }
