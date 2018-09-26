@@ -1,22 +1,27 @@
 package com.yh.survey.guest.controller;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.domain.pojo.User;
+import com.yh.survey.exceptions.AdjustBagOrderException;
 import com.yh.survey.exceptions.RemoveBagFailedException;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.guest.interf.QuestionService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,9 +76,9 @@ public class BagController {
     }
 
     @RequestMapping("/removeBag/{bagId}/{surveyId}")
-    public String removeBag(@PathVariable("bagId") Long bagId, @PathVariable("surveyId") Long surveyId,HttpSession session) {
+    public String removeBag(@PathVariable("bagId") Long bagId, @PathVariable("surveyId") Long surveyId, HttpSession session) {
         Preconditions.checkNotNull(bagId);
-        User user = (User)session.getAttribute("loginUser");
+        User user = (User) session.getAttribute("loginUser");
         Integer questionNum = questionService.queryQuestionNumByBagId(bagId);
         if (questionNum != null && questionNum > 0) {
             throw new RemoveBagFailedException(ExceptionMessage.REMOVE_BAG_FAILED);
@@ -99,6 +104,51 @@ public class BagController {
         } catch (Exception e) {
             logger.error("BagController removeBagDeeply error:{}", e);
             throw new RemoveBagFailedException(ExceptionMessage.REMOVE_BAG_FAILED);
+        }
+        return "redirect:/guest/survey/toDesign/" + surveyId;
+    }
+
+    @RequestMapping("/toAdjust/{surveyId}")
+    public String toAdjust(@PathVariable("surveyId") Long surveyId, Map<String, Object> map) {
+        Preconditions.checkNotNull(surveyId);
+        List<Bag> bagList = bagService.findBagListBySurveyId(surveyId);
+        map.put("bagList", bagList);
+        return "guest/bag_adjust";
+    }
+
+    /**
+     * 调整包裹顺序
+     *
+     * @param bagIdList    前台入参，包裹id集合
+     * @param bagOrderList 前台入参，包裹bagOrder集合
+     * @param surveyId     调查id，用于页面跳转使用
+     * @param session      session对象
+     * @return 跳转到调整好顺序后的调查设计页面
+     */
+    @RequestMapping("/doAdjust")
+    public String doAdjust(@RequestParam("bagIdList") List<Long> bagIdList,
+                           @RequestParam("bagOrderList") List<Integer> bagOrderList,
+                           @RequestParam("surveyId") Long surveyId,
+                           HttpSession session) {
+        try {
+            Preconditions.checkArgument(CollectionUtils.isNotEmpty(bagIdList), "bagIdList cannot null");
+            Preconditions.checkArgument(CollectionUtils.isNotEmpty(bagOrderList), "bagOrderList cannot null");
+            Preconditions.checkArgument(bagIdList.size() == bagOrderList.size(), "bagIdList size should equals bagOrderList size");
+            Preconditions.checkNotNull(surveyId);
+            User user = (User) session.getAttribute("loginUser");
+            List<Bag> bags = Lists.newArrayList();
+            Bag bag;
+            for (int i = 0; i < bagIdList.size(); i++) {
+                bag = new Bag();
+                bag.setId(bagIdList.get(i));
+                bag.setBagOrder(bagOrderList.get(i));
+                bag.setUpdateUser(user.getUsername());
+                bags.add(bag);
+            }
+            bagService.doAdjust(bags);
+        } catch (Exception e) {
+            logger.error("BagController doAdjust error:{}", e);
+            throw new AdjustBagOrderException(ExceptionMessage.ADJUST_BAR_ORDER_FAILED);
         }
         return "redirect:/guest/survey/toDesign/" + surveyId;
     }

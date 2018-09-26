@@ -6,11 +6,13 @@ import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.manager.BagManager;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 包裹服务实现类
@@ -78,5 +80,17 @@ public class BagServiceImpl implements BagService {
         Preconditions.checkArgument(condition.getId() != null, "bagId cannot null!");
         Preconditions.checkArgument(StringUtils.isNotBlank(condition.getUpdateUser()), "updateUser cannot null!");
         return bagManager.removeBagWithQuestions(condition);
+    }
+
+    @Override
+    public List<Bag> findBagListBySurveyId(Long surveyId) {
+        Preconditions.checkNotNull(surveyId);
+        return bagDao.findBagListBySurveyId(surveyId);
+    }
+
+    @Override
+    public Integer doAdjust(List<Bag> bagList) {
+        Preconditions.checkArgument(CollectionUtils.isNotEmpty(bagList));
+        return bagManager.adjust(bagList);
     }
 }

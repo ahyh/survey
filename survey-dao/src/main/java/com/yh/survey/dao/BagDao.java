@@ -3,6 +3,8 @@ package com.yh.survey.dao;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 
+import java.util.List;
+
 public interface BagDao {
 
     Integer insert(Bag user);
@@ -28,4 +30,12 @@ public interface BagDao {
      * @return 调查下包裹数量
      */
     Integer queryBagNumBySurveyId(Long surveyId);
+
+    /**
+     * 根据surveyId查询Bag集合
+     *
+     * @param surveyId surveyId
+     * @return Bag集合
+     */
+    List<Bag> findBagListBySurveyId(Long surveyId);
 }

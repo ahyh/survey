@@ -3,6 +3,8 @@ package com.yh.survey.guest.interf;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 
+import java.util.List;
+
 /**
  * 包裹服务
  */
@@ -45,4 +47,20 @@ public interface BagService {
      * @return 是否成功删除
      */
     Boolean removeBagWithQuestions(BagCondition condition);
+
+    /**
+     * 根据surveyId查询Bag集合
+     *
+     * @param surveyId surveyId
+     * @return Bag集合
+     */
+    List<Bag> findBagListBySurveyId(Long surveyId);
+
+    /**
+     * 调整包裹顺序
+     *
+     * @param bagList 包含包裹的id，bagOrder,updateUser信息
+     * @return 返回受影响的行数
+     */
+    Integer doAdjust(List<Bag> bagList);
 }

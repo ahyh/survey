@@ -41,6 +41,7 @@
                 <prop key="com.yh.survey.exceptions.UpdateFileTypeInvalidException">guest/survey_edit</prop>
                 <prop key="com.yh.survey.exceptions.RemoveBagFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.RemoveSurveyFailedException">error</prop>
+                <prop key="com.yh.survey.exceptions.AdjustBagOrderException">error</prop>
             </props>
         </property>
     </bean>

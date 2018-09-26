@@ -140,4 +140,11 @@
         where survey_id = #{surveyId,jdbcType=BIGINT} and is_delete = 0
     </select>
 
+    <select id="findBagListBySurveyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="allColumns"/>
+        from bag
+        where survey_id = #{surveyId,jdbcType=BIGINT} and is_delete = 0
+    </select>
+
 </mapper>
