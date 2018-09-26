@@ -75,7 +75,7 @@ public class SurveyServiceImpl implements SurveyService {
             LinkedHashSet<Question> questionSet = bag.getQuestionSet();
             if (CollectionUtils.isNotEmpty(questionSet) && questionSet.size() == 1) {
                 for (Question question : questionSet) {
-                    if (StringUtils.isBlank(question.getQuestionName()) || question.getIsDelete().equals(new Byte("0"))) {
+                    if (StringUtils.isBlank(question.getQuestionName()) || question.getIsDelete().equals(new Byte("1"))) {
                         bag.setQuestionSet(null);
                     }
                 }

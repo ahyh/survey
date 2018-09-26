@@ -1,16 +1,21 @@
 package com.yh.survey.guest.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.BagCondition;
+import com.yh.survey.domain.condition.SurveyCondition;
 import com.yh.survey.domain.pojo.Bag;
+import com.yh.survey.domain.pojo.Survey;
 import com.yh.survey.domain.pojo.User;
 import com.yh.survey.exceptions.AdjustBagOrderException;
 import com.yh.survey.exceptions.RemoveBagFailedException;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.guest.interf.QuestionService;
+import com.yh.survey.guest.interf.SurveyService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -40,6 +45,9 @@ public class BagController {
 
     @Resource
     private QuestionService questionService;
+
+    @Resource
+    private SurveyService surveyService;
 
     @RequestMapping("/toAdd/{surveyId}")
     public String toAdd(@PathVariable("surveyId") Long surveyId) {
@@ -150,6 +158,46 @@ public class BagController {
             logger.error("BagController doAdjust error:{}", e);
             throw new AdjustBagOrderException(ExceptionMessage.ADJUST_BAR_ORDER_FAILED);
         }
+        return "redirect:/guest/survey/toDesign/" + surveyId;
+    }
+
+    @RequestMapping("/toMoveOrCopyPage/{bagId}/{surveyId}")
+    public String toMoveOrCopyPage(@PathVariable("bagId") Long bagId,
+                                   @PathVariable("surveyId") Long surveyId,
+                                   @RequestParam(value = "pageNoStr", required = false) String pageNoStr,
+                                   HttpSession session,
+                                   Map<String, Object> map) {
+        User user = (User) session.getAttribute("loginUser");
+        String username = user.getUsername();
+        SurveyCondition condition = new SurveyCondition();
+        condition.setUsername(username);
+        if (StringUtils.isBlank(pageNoStr)) {
+            condition.setPageNum(1);
+        } else {
+            condition.setPageNum(Integer.valueOf(pageNoStr));
+        }
+        condition.setPageSize(5);
+        condition.setSurveyStatus((byte) 0);
+        PageInfo<Survey> surveyPage = surveyService.findSurveyPage(condition);
+        map.put("page", surveyPage);
+        return "guest/bag_moveOrCopyPage";
+    }
+
+    @RequestMapping("/copyToThisSurvey/{bagId}/{surveyId}")
+    public String copyToThisSurvey(@PathVariable("bagId") Long bagId,
+                                   @PathVariable("surveyId") Long surveyId,
+                                   HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        bagService.updateRelationshipForCopy(bagId, surveyId, user.getUsername());
+        return "redirect:/guest/survey/toDesign/" + surveyId;
+    }
+
+    @RequestMapping("/moveToThisSurvey/{bagId}/{surveyId}")
+    public String moveToThisSurvey(@PathVariable("bagId") Long bagId,
+                                   @PathVariable("surveyId") Long surveyId,
+                                   HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        bagService.updateRelationshipForMove(bagId, surveyId, user.getUsername());
         return "redirect:/guest/survey/toDesign/" + surveyId;
     }
 

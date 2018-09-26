@@ -97,7 +97,7 @@ public class SurveyController {
         } else {
             condition.setPageNum(Integer.valueOf(pageNoStr));
         }
-        condition.setPageSize(2);
+        condition.setPageSize(5);
         condition.setSurveyStatus((byte) 0);
         PageInfo<Survey> surveyPage = surveyService.findSurveyPage(condition);
         map.put("page", surveyPage);

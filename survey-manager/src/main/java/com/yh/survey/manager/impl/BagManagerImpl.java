@@ -6,6 +6,7 @@ import com.yh.survey.dao.QuestionDao;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.condition.QuestionCondition;
 import com.yh.survey.domain.pojo.Bag;
+import com.yh.survey.domain.pojo.Question;
 import com.yh.survey.manager.BagManager;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class BagManagerImpl implements BagManager {
@@ -49,5 +51,43 @@ public class BagManagerImpl implements BagManager {
             bagDao.update(bag);
         }
         return bagList.size();
+    }
+
+    @Override
+    @Transactional
+    public Integer insertBagWithQuestions(Bag bag) {
+        Preconditions.checkNotNull(bag);
+        Integer insertNum = bagDao.insert(bag);
+        if (insertNum != 1) {
+            throw new RuntimeException("insert bag error");
+        }
+        if (CollectionUtils.isNotEmpty(bag.getQuestionSet())) {
+            Set<Question> questionSet = bag.getQuestionSet();
+            for (Question question : questionSet) {
+                question.setBagId(bag.getId());
+                question.setCreateUser(bag.getCreateUser());
+            }
+            return questionDao.insertBatch(questionSet);
+        }
+        return insertNum;
+    }
+
+    @Override
+    @Transactional
+    public Integer updateBagWithQuestions(Bag bag) {
+        Preconditions.checkNotNull(bag);
+        Integer updateNum = bagDao.update(bag);
+        if (updateNum != 1) {
+            throw new RuntimeException("update bag error");
+        }
+        if (CollectionUtils.isNotEmpty(bag.getQuestionSet())) {
+            Set<Question> questionSet = bag.getQuestionSet();
+            for (Question question : questionSet) {
+                question.setUpdateUser(bag.getUpdateUser());
+                questionDao.update(question);
+            }
+            return questionSet.size();
+        }
+        return updateNum;
     }
 }

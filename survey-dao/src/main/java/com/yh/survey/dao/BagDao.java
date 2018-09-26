@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface BagDao {
 
-    Integer insert(Bag user);
+    Integer insert(Bag bag);
 
-    Integer update(Bag salary);
+    Integer update(Bag bag);
 
     Integer delete(BagCondition condition);
 

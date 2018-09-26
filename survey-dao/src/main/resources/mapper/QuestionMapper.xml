@@ -116,4 +116,26 @@
         where bag_id = #{bagId,jdbcType=BIGINT}
     </update>
 
+    <!-- 插入方法，插入后返回主键-->
+    <insert id="insertBatch" parameterType="java.util.Set">
+        insert into question
+        <include refid="allColumnsWithOutId"/>
+        values
+        <foreach collection="questionSet" item="item" index="index">
+            <trim prefix="(" suffix=")">
+                #{item.questionNo,jdbcType=VARCHAR},
+                #{item.questionName,jdbcType=VARCHAR},
+                #{item.questionType,jdbcType=TINYINT},
+                #{item.questionOptions,jdbcType=VARCHAR},
+                #{item.bagId,jdbcType=VARCHAR},
+                now(),
+                now(),
+                #{item.createUser,jdbcType=VARCHAR},
+                #{item.createUser,jdbcType=VARCHAR},
+                0
+            </trim>
+        </foreach>
+    </insert>
+
+
 </mapper>

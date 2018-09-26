@@ -22,4 +22,14 @@ public interface BagManager {
      * @return 更改的行数
      */
     Integer adjust(List<Bag> bagList);
+
+    /**
+     * 插入bag记录，同时插入question记录
+     *
+     * @param bag 包含questionSet的bag对象
+     * @return question表写数据的行数
+     */
+    Integer insertBagWithQuestions(Bag bag);
+
+    Integer updateBagWithQuestions(Bag bag);
 }

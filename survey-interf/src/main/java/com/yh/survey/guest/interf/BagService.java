@@ -63,4 +63,22 @@ public interface BagService {
      * @return 返回受影响的行数
      */
     Integer doAdjust(List<Bag> bagList);
+
+    /**
+     * 复制bagId对应的包裹到surveyId对应的调查下
+     *
+     * @param bagId      bag表主键
+     * @param surveyId   survey表主键
+     * @param updateUser 更新人
+     */
+    Integer updateRelationshipForCopy(Long bagId, Long surveyId, String updateUser);
+
+    /**
+     * 移动bagId对应的包裹到surveyId对应的调查下
+     *
+     * @param bagId      bag表主键
+     * @param surveyId   survey表主键
+     * @param updateUser 更新人
+     */
+    Integer updateRelationshipForMove(Long bagId, Long surveyId, String updateUser);
 }
