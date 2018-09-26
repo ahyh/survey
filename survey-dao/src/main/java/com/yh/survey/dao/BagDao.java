@@ -20,4 +20,12 @@ public interface BagDao {
      * @return Bag对象，包含Question
      */
     Bag getBagWithQuestions(Long bagId);
+
+    /**
+     * 根据surveyId查询该调查下包裹数量
+     *
+     * @param surveyId survey_id
+     * @return 调查下包裹数量
+     */
+    Integer queryBagNumBySurveyId(Long surveyId);
 }

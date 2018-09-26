@@ -134,4 +134,9 @@
         and b.is_delete = 0 and q.is_delete = 0
     </select>
 
+    <select id="queryBagNumBySurveyId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*) from bag
+        where survey_id = #{surveyId,jdbcType=BIGINT} and is_delete = 0
+    </select>
+
 </mapper>

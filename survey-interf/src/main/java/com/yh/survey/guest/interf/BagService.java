@@ -23,4 +23,12 @@ public interface BagService {
     Integer removeBag(Long bagId);
 
     Integer updateBag(Bag bag);
+
+    /**
+     * 根据surveyId查询该调查下包裹数量
+     *
+     * @param surveyId survey_id
+     * @return 调查下包裹数量
+     */
+    Integer queryBagNumBySurveyId(Long surveyId);
 }

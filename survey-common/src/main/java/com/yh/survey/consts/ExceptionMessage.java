@@ -12,4 +12,6 @@ public final class ExceptionMessage {
     public static final String USER_NOT_LOGIN = "用户未登录，请先登录!";
     public static final String FILE_TOO_LARGE = "文件太大了!";
     public static final String FILE_TYPE_INVALIDE = "上传的文件类型不正确!";
+    public static final String REMOVE_BAG_FAILED = "包裹下仍有问题，不能删除包裹!";
+    public static final String REMOVE_SURVEY_FAILED = "调查下仍有包裹，不能删除调查!";
 }

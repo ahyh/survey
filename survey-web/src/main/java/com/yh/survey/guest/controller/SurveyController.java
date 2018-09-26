@@ -1,14 +1,13 @@
 package com.yh.survey.guest.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Preconditions;
 import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.SurveyCondition;
 import com.yh.survey.domain.pojo.Survey;
 import com.yh.survey.domain.pojo.User;
-import com.yh.survey.exceptions.FileTooLargeException;
-import com.yh.survey.exceptions.FileTypeInvalidException;
-import com.yh.survey.exceptions.UpdateFileTooLargeException;
-import com.yh.survey.exceptions.UpdateFileTypeInvalidException;
+import com.yh.survey.exceptions.*;
+import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.guest.interf.SurveyService;
 import com.yh.survey.utils.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +38,9 @@ public class SurveyController {
 
     @Resource
     private SurveyService surveyService;
+
+    @Resource
+    private BagService bagService;
 
     @RequestMapping("/toAdd")
     public String toAdd() {
@@ -103,15 +105,20 @@ public class SurveyController {
     }
 
     /**
-     * 删除调查
+     * 删除调查，如果调查下仍有包裹则不能删除
      *
-     * @param id      survey的id
-     * @param pageNum 页码
+     * @param surveyId survey的id
+     * @param pageNum  页码
      * @return 重定向到未完成的调查页面
      */
-    @RequestMapping("/removeSurvey/{id}/{pageNum}")
-    public String removeSurvey(@PathVariable("id") Long id, @PathVariable("pageNum") Integer pageNum) {
-        surveyService.removeSurvey(id);
+    @RequestMapping("/removeSurvey/{surveyId}/{pageNum}")
+    public String removeSurvey(@PathVariable("surveyId") Long surveyId, @PathVariable("pageNum") Integer pageNum) {
+        Preconditions.checkNotNull(surveyId);
+        Integer bagNum = bagService.queryBagNumBySurveyId(surveyId);
+        if (bagNum != null && bagNum > 0) {
+            throw new RemoveSurveyFailedException(ExceptionMessage.REMOVE_SURVEY_FAILED);
+        }
+        surveyService.removeSurvey(surveyId);
         return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
     }
 

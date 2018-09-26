@@ -1,7 +1,11 @@
 package com.yh.survey.domain.pojo;
 
 import com.yh.survey.domain.BaseDomain;
+import com.yh.survey.enums.QuestionTypeEnum;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Question
@@ -64,7 +68,19 @@ public class Question extends BaseDomain {
     }
 
     public void setQuestionOptions(String questionOptions) {
-        this.questionOptions = (StringUtils.isBlank(questionOptions)) ? "" : questionOptions.replaceAll("\r\n", ",");
+        if(StringUtils.isBlank(questionOptions)){
+            this.questionOptions = "";
+            return;
+        }
+        this.questionOptions = questionOptions.replaceAll("\r\n", ",");
+        String[] splitStrs = this.questionOptions.split(",");
+        List<String> list = new LinkedList();
+        for (String temp : splitStrs) {
+            if (StringUtils.isNotBlank(temp)) {
+                list.add(temp);
+            }
+        }
+        this.questionOptions = StringUtils.join(list, ",");
     }
 
     public Long getBagId() {

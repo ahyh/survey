@@ -1,10 +1,13 @@
 package com.yh.survey.guest.controller;
 
 import com.google.common.base.Preconditions;
+import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.BagCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.domain.pojo.User;
+import com.yh.survey.exceptions.RemoveBagFailedException;
 import com.yh.survey.guest.interf.BagService;
+import com.yh.survey.guest.interf.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,9 @@ public class BagController {
 
     @Resource
     private BagService bagService;
+
+    @Resource
+    private QuestionService questionService;
 
     @RequestMapping("/toAdd/{surveyId}")
     public String toAdd(@PathVariable("surveyId") Long surveyId) {
@@ -62,6 +68,11 @@ public class BagController {
 
     @RequestMapping("/removeBag/{bagId}/{surveyId}")
     public String removeBag(@PathVariable("bagId") Long bagId, @PathVariable("surveyId") Long surveyId) {
+        Preconditions.checkNotNull(bagId);
+        Integer questionNum = questionService.queryQuestionNumByBagId(bagId);
+        if(questionNum != null && questionNum > 0){
+            throw new RemoveBagFailedException(ExceptionMessage.REMOVE_BAG_FAILED);
+        }
         bagService.removeBag(bagId);
         return "redirect:/guest/survey/toDesign/" + surveyId;
     }

@@ -60,4 +60,10 @@ public class BagServiceImpl implements BagService {
         Preconditions.checkNotNull(bag);
         return bagDao.update(bag);
     }
+
+    @Override
+    public Integer queryBagNumBySurveyId(Long surveyId) {
+        Preconditions.checkNotNull(surveyId);
+        return bagDao.queryBagNumBySurveyId(surveyId);
+    }
 }

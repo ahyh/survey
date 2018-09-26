@@ -12,4 +12,6 @@ public interface QuestionService {
     Question getQuestionByCondition(QuestionCondition condition);
 
     Integer updateQuestion(Question question);
+
+    Integer queryQuestionNumByBagId(Long bagId);
 }

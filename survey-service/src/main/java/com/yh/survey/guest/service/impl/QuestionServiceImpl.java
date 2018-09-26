@@ -44,4 +44,11 @@ public class QuestionServiceImpl implements QuestionService {
         Preconditions.checkNotNull(question);
         return questionDao.update(question);
     }
+
+    @Override
+    public Integer queryQuestionNumByBagId(Long bagId) {
+        Preconditions.checkNotNull(bagId);
+        return questionDao.queryQuestionNumByBagId(bagId);
+    }
+
 }

@@ -28,4 +28,11 @@ public class BagServiceTest extends BaseTest {
         Bag bagByCondition = bagService.getBagByCondition(condition);
         System.out.print(bagByCondition.getBagName());
     }
+
+    @Test
+    public void testGetBagNumBySurveyId(){
+        Long surveyId = 1L;
+        Integer num = bagService.queryBagNumBySurveyId(surveyId);
+        System.out.println(num);
+    }
 }

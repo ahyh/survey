@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -76,6 +77,15 @@ public class SurveyServiceImpl implements SurveyService {
                 for (Question question : questionSet) {
                     if (StringUtils.isBlank(question.getQuestionName()) || question.getIsDelete().equals(new Byte("0"))) {
                         bag.setQuestionSet(null);
+                    }
+                }
+            }
+            if (CollectionUtils.isNotEmpty(questionSet)) {
+                Iterator<Question> iterator = questionSet.iterator();
+                while (iterator.hasNext()) {
+                    Question next = iterator.next();
+                    if (next.getIsDelete().equals(new Byte("1"))) {
+                        iterator.remove();
                     }
                 }
             }

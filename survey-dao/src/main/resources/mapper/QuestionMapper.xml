@@ -105,4 +105,9 @@
         limit 1
     </select>
 
+    <select id="queryQuestionNumByBagId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*) from question
+        where bag_id = #{bagId,jdbcType=BIGINT} and is_delete = 0
+    </select>
+
 </mapper>
