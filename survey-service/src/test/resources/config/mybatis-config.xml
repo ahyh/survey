@@ -32,6 +32,8 @@
         <typeAlias alias="BagCondition" type="com.yh.survey.domain.condition.BagCondition"/>
         <typeAlias alias="Question" type="com.yh.survey.domain.pojo.Question"/>
         <typeAlias alias="QuestionCondition" type="com.yh.survey.domain.condition.QuestionCondition"/>
+        <typeAlias alias="Answer" type="com.yh.survey.domain.pojo.Answer"/>
+        <typeAlias alias="AnswerCondition" type="com.yh.survey.domain.condition.AnswerCondition"/>
     </typeAliases>
 
     <plugins>
@@ -53,6 +55,7 @@
         <mapper resource="mapper/SurveyMapper.xml"/>
         <mapper resource="mapper/BagMapper.xml"/>
         <mapper resource="mapper/QuestionMapper.xml"/>
+        <mapper resource="mapper/AnswerMapper.xml"/>
     </mappers>
 
 </configuration>

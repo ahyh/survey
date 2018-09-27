@@ -17,4 +17,5 @@ public final class ExceptionMessage {
     public static final String ADJUST_BAR_ORDER_FAILED = "调整包裹顺序出现异常!";
     public static final String COMPLETE_SURVEY_FAILED = "更新调查完成状态出现异常!";
     public static final String ENTRY_SURVEY_FAILED = "参与调查失败!";
+    public static final String FINISH_SURVEY_FAILED = "提交参与调查的答案数据出现异常!";
 }

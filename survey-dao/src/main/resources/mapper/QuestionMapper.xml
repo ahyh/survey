@@ -121,7 +121,7 @@
         insert into question
         <include refid="allColumnsWithOutId"/>
         values
-        <foreach collection="questionSet" item="item" index="index">
+        <foreach collection="questionSet" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")">
                 #{item.questionNo,jdbcType=VARCHAR},
                 #{item.questionName,jdbcType=VARCHAR},

@@ -44,6 +44,7 @@
                 <prop key="com.yh.survey.exceptions.AdjustBagOrderException">error</prop>
                 <prop key="com.yh.survey.exceptions.CompleteSurveyException">error</prop>
                 <prop key="com.yh.survey.exceptions.EntrySurveyFailedException">error</prop>
+                <prop key="com.yh.survey.exceptions.FinishSurveyException">error</prop>
             </props>
         </property>
     </bean>

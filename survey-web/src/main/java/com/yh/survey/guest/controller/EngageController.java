@@ -7,8 +7,10 @@ import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.condition.SurveyCondition;
 import com.yh.survey.domain.pojo.Bag;
 import com.yh.survey.domain.pojo.Survey;
+import com.yh.survey.domain.pojo.User;
 import com.yh.survey.enums.SurveyStatusEnum;
 import com.yh.survey.exceptions.EntrySurveyFailedException;
+import com.yh.survey.exceptions.FinishSurveyException;
 import com.yh.survey.guest.interf.EngageService;
 import com.yh.survey.guest.interf.SurveyService;
 import org.apache.commons.lang3.StringUtils;
@@ -127,15 +129,21 @@ public class EngageController {
             return "redirect:/index.jsp";
         }
 
-        if (paramMap.containsKey("submit_done")) {
-            Survey survey = (Survey) session.getAttribute("currentSurvey");
-            Long surveyId = survey.getId();
-            //engageService.saveByParse(allBagMap, surveyId);
-            session.removeAttribute("allBagMap");
-            session.removeAttribute("bagList");
-            session.removeAttribute("currentSurvey");
-            session.removeAttribute("lastIndex");
-            return "redirect:/index.jsp";
+        try{
+            if (paramMap.containsKey("submit_done")) {
+                Survey survey = (Survey) session.getAttribute("currentSurvey");
+                Long surveyId = survey.getId();
+                User user = (User) session.getAttribute("loginUser");
+                engageService.saveByParse(allBagMap, surveyId, user.getUsername());
+                session.removeAttribute("allBagMap");
+                session.removeAttribute("bagList");
+                session.removeAttribute("currentSurvey");
+                session.removeAttribute("lastIndex");
+                return "redirect:/index.jsp";
+            }
+        }catch (Exception e){
+            logger.error("EngageController finish survey error:{}",e);
+            throw new FinishSurveyException(ExceptionMessage.FINISH_SURVEY_FAILED);
         }
         return "";
     }
