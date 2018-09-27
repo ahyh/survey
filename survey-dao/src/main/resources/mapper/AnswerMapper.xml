@@ -131,6 +131,13 @@
         and is_delete = 0
     </select>
 
+    <select id="getSurveyEngageCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(distinct answer_uuid)
+        from answer
+        where survey_id = #{surveyId,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
     <select id="getOptionEngageCount" resultType="java.lang.Integer">
         select count(1)
         from answer
@@ -138,5 +145,37 @@
         and concat(",",answer_content,",") like concat("%,",#{index,jdbcType=INTEGER},",%")
         and is_delete = 0
     </select>
+
+    <select id="findAnswerListByCondition" resultMap="BaseResultMap" parameterType="AnswerCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from answer
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="answerContent != null and answerContent != ''">
+                and answer_content = #{answerContent,jdbcType=VARCHAR}
+            </if>
+            <if test="answerUuid != null and answerUuid != ''">
+                and answer_uuid = #{answerUuid,jdbcType=VARCHAR}
+            </if>
+            <if test="surveyId != null">
+                and survey_id = #{surveyId,jdbcType=BIGINT}
+            </if>
+            <if test="questionId != null">
+                and question_id = #{questionId,jdbcType=BIGINT}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
 
 </mapper>

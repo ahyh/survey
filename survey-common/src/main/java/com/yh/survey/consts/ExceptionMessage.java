@@ -20,4 +20,5 @@ public final class ExceptionMessage {
     public static final String FINISH_SURVEY_FAILED = "提交参与调查的答案数据出现异常!";
     public static final String ADMIN_LOGIN_FAILED = "用户名和密码不匹配，登录失败!";
     public static final String CHART_GET_FAILED = "获取图表统计信息出现异常!";
+    public static final String EXPORT_EXCEL_FAILED = "导出Excel文件失败!";
 }

@@ -28,4 +28,8 @@ public interface AnswerDao {
     Integer getQuestionEngageCount(Long questionId);
 
     Integer getOptionEngageCount(@Param("questionId") Long questionId,@Param("index") Integer index);
+
+    Integer getSurveyEngageCount(Long surveyId);
+
+    List<Answer> findAnswerListByCondition(AnswerCondition condition);
 }

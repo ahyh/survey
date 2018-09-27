@@ -5,9 +5,11 @@ import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.guest.condition.SurveyCondition;
 import com.yh.survey.domain.guest.pojo.Survey;
 import com.yh.survey.exceptions.ChartGetFailedException;
+import com.yh.survey.exceptions.ExportExcelFailedException;
 import com.yh.survey.guest.interf.SurveyService;
 import com.yh.survey.manager.service.StatisticsService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.slf4j.Logger;
@@ -78,11 +80,32 @@ public class StatisticsController {
         }
     }
 
+    /**
+     * 以列表的形式展示简答题的答案
+     *
+     * @param questionId questionId
+     * @param map        map域对象
+     * @return 简答题答案展示页面
+     */
     @RequestMapping("/showTextResult/{questionId}")
     public String showTextResult(@PathVariable("questionId") Long questionId,
                                  Map<String, Object> map) {
         List<String> textResult = statisticsService.findTextResultList(questionId);
         map.put("textResult", textResult);
         return "manager/statistics_textResult";
+    }
+
+    @RequestMapping("/exportExcel/{surveyId}")
+    public void exportExcel(@PathVariable("surveyId") Long surveyId, HttpServletResponse response) {
+        try {
+            SXSSFWorkbook workbook = statisticsService.getWorkbook(surveyId);
+            response.setContentType("application/vnd.ms-excel");
+            String fileName = System.nanoTime()+".xls";
+            response.setHeader("Content-Disposition", "attachment;filename=".concat(new String(fileName.getBytes("GBK"), "iso8859-1")));
+            workbook.write(response.getOutputStream());
+        } catch (Exception e) {
+            logger.error("StatisticsController exportExcel error:{}", e);
+            throw new ExportExcelFailedException(ExceptionMessage.EXPORT_EXCEL_FAILED);
+        }
     }
 }
