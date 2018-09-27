@@ -1,6 +1,6 @@
 package com.yh.survey.manager.impl;
 
-import com.yh.survey.domain.pojo.Salary;
+import com.yh.survey.domain.guest.pojo.Salary;
 import com.yh.survey.manager.SalaryManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

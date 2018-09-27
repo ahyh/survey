@@ -22,18 +22,18 @@
     </settings>
 
     <typeAliases>
-        <typeAlias alias="Salary" type="com.yh.survey.domain.pojo.Salary"/>
-        <typeAlias alias="SalaryCondition" type="com.yh.survey.domain.condition.SalaryCondition"/>
-        <typeAlias alias="User" type="com.yh.survey.domain.pojo.User"/>
-        <typeAlias alias="UserCondition" type="com.yh.survey.domain.condition.UserCondition"/>
-        <typeAlias alias="Survey" type="com.yh.survey.domain.pojo.Survey"/>
-        <typeAlias alias="SurveyCondition" type="com.yh.survey.domain.condition.SurveyCondition"/>
-        <typeAlias alias="Bag" type="com.yh.survey.domain.pojo.Bag"/>
-        <typeAlias alias="BagCondition" type="com.yh.survey.domain.condition.BagCondition"/>
-        <typeAlias alias="Question" type="com.yh.survey.domain.pojo.Question"/>
-        <typeAlias alias="QuestionCondition" type="com.yh.survey.domain.condition.QuestionCondition"/>
-        <typeAlias alias="Answer" type="com.yh.survey.domain.pojo.Answer"/>
-        <typeAlias alias="AnswerCondition" type="com.yh.survey.domain.condition.AnswerCondition"/>
+        <typeAlias alias="Salary" type="com.yh.survey.domain.guest.pojo.Salary"/>
+        <typeAlias alias="SalaryCondition" type="com.yh.survey.domain.guest.condition.SalaryCondition"/>
+        <typeAlias alias="User" type="com.yh.survey.domain.guest.pojo.User"/>
+        <typeAlias alias="UserCondition" type="com.yh.survey.domain.guest.condition.UserCondition"/>
+        <typeAlias alias="Survey" type="com.yh.survey.domain.guest.pojo.Survey"/>
+        <typeAlias alias="SurveyCondition" type="com.yh.survey.domain.guest.condition.SurveyCondition"/>
+        <typeAlias alias="Bag" type="com.yh.survey.domain.guest.pojo.Bag"/>
+        <typeAlias alias="BagCondition" type="com.yh.survey.domain.guest.condition.BagCondition"/>
+        <typeAlias alias="Question" type="com.yh.survey.domain.guest.pojo.Question"/>
+        <typeAlias alias="QuestionCondition" type="com.yh.survey.domain.guest.condition.QuestionCondition"/>
+        <typeAlias alias="Answer" type="com.yh.survey.domain.guest.pojo.Answer"/>
+        <typeAlias alias="AnswerCondition" type="com.yh.survey.domain.guest.condition.AnswerCondition"/>
     </typeAliases>
 
     <plugins>

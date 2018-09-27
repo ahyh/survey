@@ -2,8 +2,8 @@ package com.yh.survey.guest.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.yh.survey.dao.QuestionDao;
-import com.yh.survey.domain.condition.QuestionCondition;
-import com.yh.survey.domain.pojo.Question;
+import com.yh.survey.domain.guest.condition.QuestionCondition;
+import com.yh.survey.domain.guest.pojo.Question;
 import com.yh.survey.guest.interf.QuestionService;
 import org.springframework.stereotype.Service;
 

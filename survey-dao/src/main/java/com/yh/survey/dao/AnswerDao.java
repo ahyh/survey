@@ -1,7 +1,7 @@
 package com.yh.survey.dao;
 
-import com.yh.survey.domain.condition.AnswerCondition;
-import com.yh.survey.domain.pojo.Answer;
+import com.yh.survey.domain.guest.condition.AnswerCondition;
+import com.yh.survey.domain.guest.pojo.Answer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

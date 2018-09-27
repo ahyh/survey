@@ -1,7 +1,7 @@
 package com.yh.survey.service.test;
 
-import com.yh.survey.domain.condition.BagCondition;
-import com.yh.survey.domain.pojo.Bag;
+import com.yh.survey.domain.guest.condition.BagCondition;
+import com.yh.survey.domain.guest.pojo.Bag;
 import com.yh.survey.guest.interf.BagService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;

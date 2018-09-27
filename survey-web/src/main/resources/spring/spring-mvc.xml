@@ -45,6 +45,8 @@
                 <prop key="com.yh.survey.exceptions.CompleteSurveyException">error</prop>
                 <prop key="com.yh.survey.exceptions.EntrySurveyFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.FinishSurveyException">error</prop>
+                <prop key="com.yh.survey.exceptions.AdminLoginFailedException">manager/admin_login</prop>
+                <prop key="com.yh.survey.exceptions.AdminNotLoginException">manager/admin_login</prop>
             </props>
         </property>
     </bean>

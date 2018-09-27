@@ -1,7 +1,7 @@
 package com.yh.survey.dao;
 
-import com.yh.survey.domain.condition.SurveyCondition;
-import com.yh.survey.domain.pojo.Survey;
+import com.yh.survey.domain.guest.condition.SurveyCondition;
+import com.yh.survey.domain.guest.pojo.Survey;
 
 import java.util.List;
 

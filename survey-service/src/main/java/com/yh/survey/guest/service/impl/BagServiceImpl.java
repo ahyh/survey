@@ -2,8 +2,8 @@ package com.yh.survey.guest.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.yh.survey.dao.BagDao;
-import com.yh.survey.domain.condition.BagCondition;
-import com.yh.survey.domain.pojo.Bag;
+import com.yh.survey.domain.guest.condition.BagCondition;
+import com.yh.survey.domain.guest.pojo.Bag;
 import com.yh.survey.guest.interf.BagService;
 import com.yh.survey.manager.BagManager;
 import org.apache.commons.collections4.CollectionUtils;

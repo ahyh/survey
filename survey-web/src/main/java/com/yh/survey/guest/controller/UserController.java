@@ -1,6 +1,6 @@
 package com.yh.survey.guest.controller;
 
-import com.yh.survey.domain.pojo.User;
+import com.yh.survey.domain.guest.pojo.User;
 import com.yh.survey.guest.interf.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

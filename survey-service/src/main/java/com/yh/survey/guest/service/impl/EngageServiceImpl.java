@@ -2,7 +2,7 @@ package com.yh.survey.guest.service.impl;
 
 import com.google.common.collect.Lists;
 import com.yh.survey.dao.AnswerDao;
-import com.yh.survey.domain.pojo.Answer;
+import com.yh.survey.domain.guest.pojo.Answer;
 import com.yh.survey.guest.interf.EngageService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

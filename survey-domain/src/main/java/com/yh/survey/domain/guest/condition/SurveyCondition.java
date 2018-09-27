@@ -1,15 +1,13 @@
-package com.yh.survey.domain.pojo;
+package com.yh.survey.domain.guest.condition;
 
-import com.yh.survey.domain.BaseDomain;
-
-import java.util.LinkedHashSet;
+import com.yh.survey.domain.BasePageCondition;
 
 /**
- * Survey对象
+ * Survey表查询条件
  *
  * @author yanhuan
  */
-public class Survey extends BaseDomain {
+public class SurveyCondition extends BasePageCondition {
 
     private String surveyNo;
 
@@ -20,8 +18,6 @@ public class Survey extends BaseDomain {
     private String logoPath;
 
     private String username;
-
-    private LinkedHashSet<Bag> bagSet;
 
     public String getSurveyNo() {
         return surveyNo;
@@ -61,13 +57,5 @@ public class Survey extends BaseDomain {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public LinkedHashSet<Bag> getBagSet() {
-        return bagSet;
-    }
-
-    public void setBagSet(LinkedHashSet<Bag> bagSet) {
-        this.bagSet = bagSet;
     }
 }

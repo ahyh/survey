@@ -1,7 +1,7 @@
 package com.yh.survey.domain.utils;
 
-import com.yh.survey.domain.pojo.Bag;
-import com.yh.survey.domain.pojo.Question;
+import com.yh.survey.domain.guest.pojo.Bag;
+import com.yh.survey.domain.guest.pojo.Question;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpSession;

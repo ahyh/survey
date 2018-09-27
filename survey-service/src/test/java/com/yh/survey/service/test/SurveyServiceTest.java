@@ -1,6 +1,6 @@
 package com.yh.survey.service.test;
 
-import com.yh.survey.domain.pojo.Survey;
+import com.yh.survey.domain.guest.pojo.Survey;
 import com.yh.survey.guest.interf.SurveyService;
 import org.junit.Assert;
 import org.junit.Test;

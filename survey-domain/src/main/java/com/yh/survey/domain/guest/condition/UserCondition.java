@@ -1,18 +1,20 @@
-package com.yh.survey.domain.pojo;
+package com.yh.survey.domain.guest.condition;
 
-import com.yh.survey.domain.BaseDomain;
+import com.yh.survey.domain.BasePageCondition;
 
 /**
- * User实体类
+ * User表查询条件
  *
  * @author yanhuan
  */
-public class User extends BaseDomain {
+public class UserCondition extends BasePageCondition {
+
+    private Long id;
 
     /**
      * 用户编号
      */
-    private String userNo;
+    private Integer userNo;
 
     /**
      * 用户名
@@ -25,15 +27,23 @@ public class User extends BaseDomain {
     private String password;
 
     /**
-     * 是否企业用户:1-企业用户，0-个人用户
+     * 是否企业用户
      */
     private Byte userType;
 
-    public String getUserNo() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getUserNo() {
         return userNo;
     }
 
-    public void setUserNo(String userNo) {
+    public void setUserNo(Integer userNo) {
         this.userNo = userNo;
     }
 

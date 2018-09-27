@@ -1,6 +1,6 @@
 package com.yh.survey.guest.interf;
 
-import com.yh.survey.domain.pojo.User;
+import com.yh.survey.domain.guest.pojo.User;
 
 /**
  * UserService接口

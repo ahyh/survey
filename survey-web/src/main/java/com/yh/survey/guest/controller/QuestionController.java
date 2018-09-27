@@ -1,9 +1,9 @@
 package com.yh.survey.guest.controller;
 
 import com.google.common.base.Preconditions;
-import com.yh.survey.domain.condition.QuestionCondition;
-import com.yh.survey.domain.pojo.Question;
-import com.yh.survey.domain.pojo.User;
+import com.yh.survey.domain.guest.condition.QuestionCondition;
+import com.yh.survey.domain.guest.pojo.Question;
+import com.yh.survey.domain.guest.pojo.User;
 import com.yh.survey.guest.interf.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

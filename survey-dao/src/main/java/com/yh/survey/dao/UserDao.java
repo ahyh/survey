@@ -1,7 +1,7 @@
 package com.yh.survey.dao;
 
-import com.yh.survey.domain.condition.UserCondition;
-import com.yh.survey.domain.pojo.User;
+import com.yh.survey.domain.guest.condition.UserCondition;
+import com.yh.survey.domain.guest.pojo.User;
 
 /**
  * UserDao

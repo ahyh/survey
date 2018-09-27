@@ -1,7 +1,7 @@
 package com.yh.survey.guest.interf;
 
-import com.yh.survey.domain.condition.QuestionCondition;
-import com.yh.survey.domain.pojo.Question;
+import com.yh.survey.domain.guest.condition.QuestionCondition;
+import com.yh.survey.domain.guest.pojo.Question;
 
 public interface QuestionService {
 

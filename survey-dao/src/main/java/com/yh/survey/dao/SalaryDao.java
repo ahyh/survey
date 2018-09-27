@@ -1,7 +1,7 @@
 package com.yh.survey.dao;
 
-import com.yh.survey.domain.condition.SalaryCondition;
-import com.yh.survey.domain.pojo.Salary;
+import com.yh.survey.domain.guest.condition.SalaryCondition;
+import com.yh.survey.domain.guest.pojo.Salary;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

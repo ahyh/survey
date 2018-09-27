@@ -1,4 +1,4 @@
-package com.yh.survey.domain.condition;
+package com.yh.survey.domain.guest.condition;
 
 
 import com.yh.survey.domain.BasePageCondition;

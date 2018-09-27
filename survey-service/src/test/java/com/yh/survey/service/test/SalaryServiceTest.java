@@ -2,8 +2,8 @@ package com.yh.survey.service.test;
 
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
-import com.yh.survey.domain.condition.SalaryCondition;
-import com.yh.survey.domain.pojo.Salary;
+import com.yh.survey.domain.guest.condition.SalaryCondition;
+import com.yh.survey.domain.guest.pojo.Salary;
 import com.yh.survey.interf.SalaryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

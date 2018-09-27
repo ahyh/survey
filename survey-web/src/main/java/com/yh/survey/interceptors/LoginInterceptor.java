@@ -1,7 +1,9 @@
 package com.yh.survey.interceptors;
 
 import com.yh.survey.consts.ExceptionMessage;
-import com.yh.survey.domain.pojo.User;
+import com.yh.survey.domain.guest.pojo.User;
+import com.yh.survey.domain.manager.pojo.Admin;
+import com.yh.survey.exceptions.AdminNotLoginException;
 import com.yh.survey.exceptions.UserNotLoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,15 +38,30 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         publicResSet.add("/guest/user/register");
         publicResSet.add("/guest/user/login");
         publicResSet.add("/guest/user/logout");
+        publicResSet.add("/manage/admin/toMain");
+        publicResSet.add("/manage/admin/toLogin");
+        publicResSet.add("/manage/admin/login");
+        publicResSet.add("/manage/admin/logout");
         String servletPath = request.getServletPath();
         if (publicResSet.contains(servletPath)) {
             return true;
         }
-        //3-其他资源需要登录才能操作
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            throw new UserNotLoginException(ExceptionMessage.USER_NOT_LOGIN);
+
+        //检查当前请求是guest还是manage
+        if(servletPath.startsWith("/guest")){
+            //3-其他资源需要登录才能操作
+            HttpSession session = request.getSession();
+            User loginUser = (User) session.getAttribute("loginUser");
+            if (loginUser == null) {
+                throw new UserNotLoginException(ExceptionMessage.USER_NOT_LOGIN);
+            }
+        } else if(servletPath.startsWith("/manage")){
+            //3-其他资源需要登录才能操作
+            HttpSession session = request.getSession();
+            Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
+            if (loginAdmin == null) {
+                throw new AdminNotLoginException(ExceptionMessage.USER_NOT_LOGIN);
+            }
         }
         return true;
     }

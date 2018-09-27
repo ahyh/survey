@@ -3,4 +3,5 @@
 
 	<div id="bottomDiv" class="borderDiv">
 		©CopyRight All Rights Reserved
+		[<a href="manage/admin/toMain">管理员入口</a>]
 	</div>

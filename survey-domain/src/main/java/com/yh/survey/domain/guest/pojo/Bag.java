@@ -1,4 +1,4 @@
-package com.yh.survey.domain.pojo;
+package com.yh.survey.domain.guest.pojo;
 
 import com.yh.survey.domain.BaseDomain;
 

@@ -1,8 +1,8 @@
 package com.yh.survey.interf;
 
 import com.github.pagehelper.PageInfo;
-import com.yh.survey.domain.condition.SalaryCondition;
-import com.yh.survey.domain.pojo.Salary;
+import com.yh.survey.domain.guest.condition.SalaryCondition;
+import com.yh.survey.domain.guest.pojo.Salary;
 
 import java.util.List;
 
