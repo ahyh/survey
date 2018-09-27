@@ -124,4 +124,19 @@
         and is_delete = 0
     </select>
 
+    <select id="getQuestionEngageCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*)
+        from answer
+        where question_id = #{questionId,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
+    <select id="getOptionEngageCount" resultType="java.lang.Integer">
+        select count(1)
+        from answer
+        where question_id = #{questionId,jdbcType=BIGINT}
+        and concat(",",answer_content,",") like concat("%,",#{index,jdbcType=INTEGER},",%")
+        and is_delete = 0
+    </select>
+
 </mapper>

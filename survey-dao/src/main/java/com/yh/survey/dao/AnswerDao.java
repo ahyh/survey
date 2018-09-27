@@ -24,4 +24,8 @@ public interface AnswerDao {
     Integer insertBatch(@Param("answerList") List<Answer> answerList);
 
     List<String> findAnswerContentListByQuestionId(Long questionId);
+
+    Integer getQuestionEngageCount(Long questionId);
+
+    Integer getOptionEngageCount(@Param("questionId") Long questionId,@Param("index") Integer index);
 }
