@@ -22,4 +22,6 @@ public interface AnswerDao {
     Answer getAnswerByCondition(AnswerCondition condition);
 
     Integer insertBatch(@Param("answerList") List<Answer> answerList);
+
+    List<String> findAnswerContentListByQuestionId(Long questionId);
 }

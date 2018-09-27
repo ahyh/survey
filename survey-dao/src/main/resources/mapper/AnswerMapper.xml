@@ -117,4 +117,11 @@
         </foreach>
     </insert>
 
+    <select id="findAnswerContentListByQuestionId" parameterType="java.lang.Long" resultType="java.lang.String">
+        select answer_content
+        from answer
+        where question_id = #{questionId,jdbcType=BIGINT}
+        and is_delete = 0
+    </select>
+
 </mapper>

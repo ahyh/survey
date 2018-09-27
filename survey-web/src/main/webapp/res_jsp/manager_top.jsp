@@ -14,7 +14,7 @@
 		[<a href="manage/admin/logout">退出登录</a>]
 		
 		<%--<atguigu:auth servletPath="manager/statistics/showAllAvailable">--%>
-			<%--[<a href="manager/statistics/showAllAvailable">统计调查</a>]--%>
+			[<a href="manage/statistics/showAllAvailable">统计调查</a>]
 		<%--</atguigu:auth>--%>
 		<%----%>
 		<%--<atguigu:auth servletPath="manager/res/showList">--%>

@@ -49,10 +49,10 @@
 											<td>${question.questionName }</td>
 											<td>
 												<c:if test="${question.questionType==0 || question.questionType==1 }">
-													<a target="_blank" href="manager/statistics/showChart/${question.questionId }">以图表形式查看统计结果</a>
+													<a target="_blank" href="manage/statistics/showChart/${question.id }">以图表形式查看统计结果</a>
 												</c:if>
 												<c:if test="${question.questionType==2 }">
-													<a href="manager/statistics/showTextResult/${question.questionId }">以列表形式查看统计结果</a>
+													<a href="manage/statistics/showTextResult/${question.id }">以列表形式查看统计结果</a>
 												</c:if>
 											</td>
 										</tr>

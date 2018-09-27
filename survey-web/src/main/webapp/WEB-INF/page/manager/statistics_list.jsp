@@ -32,13 +32,13 @@
 				<c:forEach items="${page.list }" var="survey">
 					
 					<tr>
-						<td>${survey.surveyId }</td>
+						<td>${survey.id }</td>
 						<td>${survey.surveyName }</td>
 						<td>
-							<a href="manager/statistics/showSummary/${survey.surveyId }">查看调查大纲</a>
+							<a href="manage/statistics/showSummary/${survey.id }">查看调查大纲</a>
 						</td>
 						<td>
-							<a href="manager/statistics/exportExcel/${survey.surveyId }">导出Excel文件</a>
+							<a href="manage/statistics/exportExcel/${survey.id }">导出Excel文件</a>
 						</td>
 					</tr>
 					
@@ -46,7 +46,7 @@
 				
 				<tr>
 					<td colspan="4">
-						<c:set var="targetUrl" value="manager/statistics/showAllAvailable"/>
+						<c:set var="targetUrl" value="manage/statistics/showAllAvailable"/>
 						<%@include file="/res_jsp/navigator.jsp" %>
 					</td>
 				</tr>
