@@ -8,6 +8,7 @@ import com.yh.survey.manager.service.ResService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * ResServiceImpl
@@ -41,5 +42,20 @@ public class ResServiceImpl implements ResService {
     @Override
     public Integer getMaxResPos() {
         return resDao.getMaxResPos();
+    }
+
+    @Override
+    public List<Res> findResList() {
+        return resDao.findResList();
+    }
+
+    @Override
+    public Byte updatePublicStatus(Long resId,String updateUser) {
+        Preconditions.checkNotNull(resId);
+        resDao.updatePublicStatus(resId,updateUser);
+        ResCondition condition = new ResCondition();
+        condition.setId(resId);
+        Res res = resDao.getResByCondition(condition);
+        return res.getPublicStatus();
     }
 }

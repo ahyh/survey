@@ -18,7 +18,7 @@
 		<%--</atguigu:auth>--%>
 		<%----%>
 		<%--<atguigu:auth servletPath="manager/res/showList">--%>
-			<%--[<a href="manager/res/showList">资源列表</a>]--%>
+			[<a href="manage/res/showList">资源列表</a>]
 		<%--</atguigu:auth>--%>
 		<%----%>
 		<%--<atguigu:auth servletPath="manager/auth/toAddUI">--%>

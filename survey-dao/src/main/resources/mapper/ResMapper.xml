@@ -104,4 +104,44 @@
     <select id="getMaxResCode" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select max(res_code) from res where res_pos = #{maxPos,jdbcType=INTEGER} and is_delete = 0
     </select>
+
+    <select id="findResList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="allColumns"/>
+        from res
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="servletPath != null and servletPath != ''">
+                and servlet_path = #{servletPath,jdbcType=VARCHAR}
+            </if>
+            <if test="resCode != null">
+                and res_code = #{resCode,jdbcType=INTEGER}
+            </if>
+            <if test="resPos != null">
+                and res_pos = #{resPos,jdbcType=INTEGER}
+            </if>
+            <if test="publicStatus != null">
+                and public_status = #{publicStatus,jdbcType=TINYINT}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updatePublicStatus">
+        update res set
+        public_status = not public_status,
+        update_time = now(),
+        update_user = #{updateUser,jdbcType=VARCHAR}
+        where id = #{resId,jdbcType=BIGINT}
+        and is_delete = 0
+    </update>
 </mapper>

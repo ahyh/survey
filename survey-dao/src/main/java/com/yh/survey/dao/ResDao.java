@@ -2,6 +2,9 @@ package com.yh.survey.dao;
 
 import com.yh.survey.domain.manager.condition.ResCondition;
 import com.yh.survey.domain.manager.pojo.Res;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * ResDao
@@ -21,4 +24,8 @@ public interface ResDao {
     Integer getMaxResPos();
 
     Integer getMaxResCode(Integer maxPos);
+
+    List<Res> findResList();
+
+    Integer updatePublicStatus(@Param("resId") Long resId, @Param("updateUser") String updateUser);
 }
