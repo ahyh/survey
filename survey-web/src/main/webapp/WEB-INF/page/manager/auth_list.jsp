@@ -54,16 +54,16 @@
 					</tr>
 					<c:forEach items="${authList }" var="auth">
 						<tr>
-							<td>${auth.authId }</td>
+							<td>${auth.id }</td>
 							<td>
-								<input id="${auth.authId }" type="text" name="authName" value="${auth.authName }" class="longInput"/>
+								<input id="${auth.id }" type="text" name="authName" value="${auth.authName }" class="longInput"/>
 							</td>
 							<td>
-								<input type="checkbox" name="authIdList" value="${auth.authId }" id="checkbox${auth.authId }"/>
-								<label for="checkbox${auth.authId }">点我更轻松</label>
+								<input type="checkbox" name="authIdList" value="${auth.id }" id="checkbox${auth.id }"/>
+								<label for="checkbox${auth.id }">点我更轻松</label>
 							</td>
 							<td>
-								<a href="manager/auth/toDispatcherUI/${auth.authId }">分配资源</a>
+								<a href="manager/auth/toDispatcher/${auth.id }">分配资源</a>
 							</td>
 						</tr>
 					</c:forEach>

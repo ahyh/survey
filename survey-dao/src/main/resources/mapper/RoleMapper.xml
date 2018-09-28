@@ -73,4 +73,35 @@
         limit 1
     </select>
 
+    <select id="findRoleList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="allColumns"/>
+        from role
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="batchDelete" parameterType="java.util.List">
+        update role
+        set is_delete = 1,update_time = now(),update_user = #{updateUser,jdbcType=VARCHAR}
+        where id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
 </mapper>

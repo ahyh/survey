@@ -12,7 +12,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		创建管理员
-		<form action="manager/admin/saveAdmin" method="post">
+		<form action="manage/admin/saveAdmin" method="post">
 			<table class="formTable">
 				<c:if test="${exception!=null }">
 					<tr>
@@ -28,7 +28,7 @@
 				<tr>
 					<td>密码</td>
 					<td>
-						<input type="password" name="adminPwd" class="longInput"/>
+						<input type="password" name="password" class="longInput"/>
 					</td>
 				</tr>
 				<tr>

@@ -12,7 +12,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		创建角色
-		<form action="manager/role/saveRole" method="post">
+		<form action="manage/role/saveRole" method="post">
 			<table class="formTable">
 				<tr>
 					<td>角色名称</td>

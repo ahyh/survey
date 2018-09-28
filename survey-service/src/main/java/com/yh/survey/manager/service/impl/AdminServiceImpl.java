@@ -10,13 +10,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
     @Resource
     private AdminDao adminDao;
-
 
     @Override
     public Admin login(Admin admin) {
@@ -29,5 +29,16 @@ public class AdminServiceImpl implements AdminService {
         Admin loginAdmin = adminDao.getAdminByCondition(condition);
         Preconditions.checkArgument(loginAdmin != null, "adminName and password cannot matching");
         return loginAdmin;
+    }
+
+    @Override
+    public List<Admin> findAdminList() {
+        return adminDao.findAdminList();
+    }
+
+    @Override
+    public Integer saveAdmin(Admin admin) {
+        Preconditions.checkNotNull(admin);
+        return adminDao.insert(admin);
     }
 }

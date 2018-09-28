@@ -81,4 +81,29 @@
         limit 1
     </select>
 
+    <select id="findAdminList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="allColumns"/>
+        from admin
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="adminName != null and adminName != ''">
+                and admin_name = #{adminName,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
 </mapper>

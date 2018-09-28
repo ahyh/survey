@@ -12,7 +12,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		[创建权限]
-		<form action="manager/auth/saveAuth" method="post">
+		<form action="manage/auth/saveAuth" method="post">
 			<table class="formTable">
 				<tr>
 					<td>权限名称</td>

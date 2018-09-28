@@ -38,7 +38,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		角色列表
-		<form action="manager/role/batchDelete" method="post">
+		<form action="manage/role/batchDelete" method="post">
 			<table class="dataTable">
 				<c:if test="${empty roleList }">
 					<tr>
@@ -54,16 +54,16 @@
 					</tr>
 					<c:forEach items="${roleList }" var="role">
 						<tr>
-							<td>${role.roleId }</td>
+							<td>${role.id }</td>
 							<td>
-								<input id="${role.roleId }" type="text" name="roleName" value="${role.roleName }" class="longInput"/>
+								<input id="${role.id }" type="text" name="roleName" value="${role.roleName }" class="longInput"/>
 							</td>
 							<td>
-								<input type="checkbox" name="roleIdList" value="${role.roleId }" id="checkbox${role.roleId }"/>
-								<label for="checkbox${role.roleId }">点我更轻松</label>
+								<input type="checkbox" name="roleIdList" value="${role.id }" id="checkbox${role.id }"/>
+								<label for="checkbox${role.id }">点我更轻松</label>
 							</td>
 							<td>
-								<a href="manager/role/toDispatcherUI/${role.roleId }">分配权限</a>
+								<a href="manager/role/toDispatcherUI/${role.id }">分配权限</a>
 							</td>
 						</tr>
 					</c:forEach>
