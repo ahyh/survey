@@ -49,6 +49,7 @@
                 <prop key="com.yh.survey.exceptions.AdminNotLoginException">manager/admin_login</prop>
                 <prop key="com.yh.survey.exceptions.ChartGetFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.ExportExcelFailedException">error</prop>
+                <prop key="com.yh.survey.exceptions.DeeplyRemoveSurveyFailedException">error</prop>
             </props>
         </property>
     </bean>
