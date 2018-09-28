@@ -95,12 +95,18 @@ public class StatisticsController {
         return "manager/statistics_textResult";
     }
 
+    /**
+     * 导出Excel文件
+     *
+     * @param surveyId surveyId
+     * @param response response对象
+     */
     @RequestMapping("/exportExcel/{surveyId}")
     public void exportExcel(@PathVariable("surveyId") Long surveyId, HttpServletResponse response) {
         try {
             SXSSFWorkbook workbook = statisticsService.getWorkbook(surveyId);
             response.setContentType("application/vnd.ms-excel");
-            String fileName = System.nanoTime()+".xls";
+            String fileName = System.nanoTime() + ".xls";
             response.setHeader("Content-Disposition", "attachment;filename=".concat(new String(fileName.getBytes("GBK"), "iso8859-1")));
             workbook.write(response.getOutputStream());
         } catch (Exception e) {

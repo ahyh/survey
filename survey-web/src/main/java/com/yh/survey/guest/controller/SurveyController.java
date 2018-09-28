@@ -127,6 +127,26 @@ public class SurveyController {
         return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
     }
 
+    /**
+     * 深度删除调查，同时删除调查下所有的包裹及包裹中的所有问题
+     *
+     * @param surveyId 调查id
+     * @param pageNum  分页页码
+     * @return 深度删除后跳转到调查展示页面
+     */
+    @RequestMapping("/deeplyRemove/{surveyId}/{pageNum}")
+    public String deeplyRemove(@PathVariable("surveyId") Long surveyId,
+                               @PathVariable("pageNum") Integer pageNum) {
+        try {
+            Preconditions.checkNotNull(surveyId);
+            surveyService.deeplyRemove(surveyId);
+            return "redirect:/guest/survey/showMyUncompleted?pageNoStr=" + pageNum;
+        } catch (Exception e) {
+            logger.error("SurveyController deeplyRemove error:{}", e);
+            throw new DeeplyRemoveSurveyFailedException(ExceptionMessage.DEEPLY_REMOVE_SURVEY_FAILED);
+        }
+    }
+
     @RequestMapping("/toEdit/{id}/{pageNum}")
     public String toEdit(@PathVariable("id") Long id, @PathVariable("pageNum") Integer pageNum, Map<String, Object> map) {
         SurveyCondition condition = new SurveyCondition();

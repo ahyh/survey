@@ -137,5 +137,12 @@
         </foreach>
     </insert>
 
+    <update id="deleteBatch" parameterType="java.util.List">
+        update question set is_delete = 0,update_time = now()
+        where id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </update>
 
 </mapper>

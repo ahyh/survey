@@ -21,4 +21,5 @@ public final class ExceptionMessage {
     public static final String ADMIN_LOGIN_FAILED = "用户名和密码不匹配，登录失败!";
     public static final String CHART_GET_FAILED = "获取图表统计信息出现异常!";
     public static final String EXPORT_EXCEL_FAILED = "导出Excel文件失败!";
+    public static final String DEEPLY_REMOVE_SURVEY_FAILED = "深度删除调查失败!";
 }

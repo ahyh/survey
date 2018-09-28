@@ -9,8 +9,6 @@ import com.yh.survey.domain.BasePageCondition;
  */
 public class UserCondition extends BasePageCondition {
 
-    private Long id;
-
     /**
      * 用户编号
      */
@@ -31,13 +29,10 @@ public class UserCondition extends BasePageCondition {
      */
     private Byte userType;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    /**
+     * 用户权限码
+     */
+    private String codeArray;
 
     public Integer getUserNo() {
         return userNo;
@@ -69,5 +64,13 @@ public class UserCondition extends BasePageCondition {
 
     public void setUserType(Byte userType) {
         this.userType = userType;
+    }
+
+    public String getCodeArray() {
+        return codeArray;
+    }
+
+    public void setCodeArray(String codeArray) {
+        this.codeArray = codeArray;
     }
 }

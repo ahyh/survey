@@ -9,6 +9,7 @@ import com.yh.survey.domain.guest.pojo.Bag;
 import com.yh.survey.domain.guest.pojo.Question;
 import com.yh.survey.domain.guest.pojo.Survey;
 import com.yh.survey.guest.interf.SurveyService;
+import com.yh.survey.manager.SurveyManager;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Resource
     private SurveyDao surveyDao;
+
+    @Resource
+    private SurveyManager surveyManager;
 
     @Override
     public Integer insert(Survey survey) {
@@ -94,6 +98,14 @@ public class SurveyServiceImpl implements SurveyService {
                 }
             }
         }
+        //如果包裹是已经删除的则去掉
+        Iterator<Bag> bagIterator = bagSet.iterator();
+        while(bagIterator.hasNext()){
+            Bag next = bagIterator.next();
+            if(next.getIsDelete().equals(new Byte("1"))){
+                bagIterator.remove();
+            }
+        }
         return survey;
     }
 
@@ -126,5 +138,12 @@ public class SurveyServiceImpl implements SurveyService {
             }
         }
         return surveyDao.update(survey);
+    }
+
+    @Override
+    public void deeplyRemove(Long surveyId) {
+        Preconditions.checkNotNull(surveyId);
+        Survey survey = surveyDao.getSurveyWithBagAndQuestions(surveyId);
+        surveyManager.deeplyRemove(survey);
     }
 }

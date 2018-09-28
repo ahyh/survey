@@ -13,6 +13,11 @@ public class AdminCondition extends BasePageCondition {
 
     private String password;
 
+    /**
+     * 用户权限码
+     */
+    private String codeArray;
+
     public String getAdminName() {
         return adminName;
     }
@@ -27,5 +32,13 @@ public class AdminCondition extends BasePageCondition {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCodeArray() {
+        return codeArray;
+    }
+
+    public void setCodeArray(String codeArray) {
+        this.codeArray = codeArray;
     }
 }

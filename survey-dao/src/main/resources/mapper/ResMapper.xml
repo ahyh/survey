@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.survey.dao.ResDao">
+    <resultMap id="BaseResultMap" type="Res">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="servlet_path" property="servletPath" jdbcType="VARCHAR"/>
+        <result column="res_code" property="resCode" jdbcType="INTEGER"/>
+        <result column="res_pos" property="resPos" jdbcType="INTEGER"/>
+        <result column="public_status" property="publicStatus" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="allColumnsWithOutId">
+        (servlet_path,res_code,res_pos,public_status,create_time,update_time,create_user,update_user,is_delete)
+    </sql>
+
+    <sql id="allColumns">
+        id,servlet_path,res_code,res_pos,public_status,create_time,update_time,create_user,update_user,is_delete
+    </sql>
+
+    <!-- 插入方法，插入后返回主键-->
+    <insert id="insert" parameterType="Res" useGeneratedKeys="true" keyProperty="id">
+        insert into res
+        <include refid="allColumnsWithOutId"/>
+        values (
+        #{servletPath,jdbcType=VARCHAR},
+        #{resCode,jdbcType=INTEGER},
+        #{resPos,jdbcType=INTEGER},
+        #{publicStatus,jdbcType=TINYINT},
+        now(),
+        now(),
+        #{createUser,jdbcType=VARCHAR},
+        #{createUser,jdbcType=VARCHAR},
+        0
+        )
+    </insert>
+
+    <update id="update" parameterType="Res">
+        update res
+        <set>
+            update_time = now(),update_user=#{updateUser,jdbcType=VARCHAR},
+            <trim>
+                <if test="servletPath != null and servletPath != ''">
+                    servlet_path = #{servletPath,jdbcType=VARCHAR},
+                </if>
+                <if test="resCode != null">
+                    res_code = #{resCode,jdbcType=INTEGER},
+                </if>
+                <if test="resPos != null">
+                    res_pos = #{resPos,jdbcType=INTEGER},
+                </if>
+                <if test="publicStatus != null">
+                    public_status = #{publicStatus,jdbcType=TINYINT},
+                </if>
+            </trim>
+        </set>
+        where id =#{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        update res set is_delete = 1,update_time = now() where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <select id="getResByCondition" resultMap="BaseResultMap" parameterType="ResCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from res
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="servletPath != null and servletPath != ''">
+                and servlet_path = #{servletPath,jdbcType=VARCHAR}
+            </if>
+            <if test="resCode != null">
+                and res_code = #{resCode,jdbcType=INTEGER}
+            </if>
+            <if test="resPos != null">
+                and res_pos = #{resPos,jdbcType=INTEGER}
+            </if>
+            <if test="publicStatus != null">
+                and public_status = #{publicStatus,jdbcType=TINYINT}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+        limit 1
+    </select>
+
+    <select id="getMaxResPos" resultType="java.lang.Integer">
+        select max(res_pos) from res where is_delete = 0
+    </select>
+
+    <select id="getMaxResCode" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select max(res_code) from res where res_pos = #{maxPos,jdbcType=INTEGER} and is_delete = 0
+    </select>
+</mapper>

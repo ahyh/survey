@@ -2,6 +2,7 @@ package com.yh.survey.dao;
 
 import com.yh.survey.domain.guest.condition.BagCondition;
 import com.yh.survey.domain.guest.pojo.Bag;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -38,4 +39,12 @@ public interface BagDao {
      * @return Bag集合
      */
     List<Bag> findBagListBySurveyId(Long surveyId);
+
+    /**
+     * 批量删除
+     *
+     * @param list 需要删除的id集合
+     * @return 删除的行数
+     */
+    Integer deleteBatch(@Param("list") List<Long> list);
 }

@@ -29,6 +29,11 @@ public class User extends BaseDomain {
      */
     private Byte userType;
 
+    /**
+     * 用户权限码
+     */
+    private String codeArray;
+
     public String getUserNo() {
         return userNo;
     }
@@ -59,5 +64,13 @@ public class User extends BaseDomain {
 
     public void setUserType(Byte userType) {
         this.userType = userType;
+    }
+
+    public String getCodeArray() {
+        return codeArray;
+    }
+
+    public void setCodeArray(String codeArray) {
+        this.codeArray = codeArray;
     }
 }

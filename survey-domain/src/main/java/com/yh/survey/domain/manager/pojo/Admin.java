@@ -9,9 +9,20 @@ import com.yh.survey.domain.BaseDomain;
  */
 public class Admin extends BaseDomain {
 
+    /**
+     * 管理员名称
+     */
     private String adminName;
 
+    /**
+     * 管理员密码
+     */
     private String password;
+
+    /**
+     * 用户权限码
+     */
+    private String codeArray;
 
     public String getAdminName() {
         return adminName;
@@ -27,5 +38,13 @@ public class Admin extends BaseDomain {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCodeArray() {
+        return codeArray;
+    }
+
+    public void setCodeArray(String codeArray) {
+        this.codeArray = codeArray;
     }
 }

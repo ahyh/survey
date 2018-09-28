@@ -36,6 +36,12 @@
         <typeAlias alias="AnswerCondition" type="com.yh.survey.domain.guest.condition.AnswerCondition"/>
         <typeAlias alias="Admin" type="com.yh.survey.domain.manager.pojo.Admin"/>
         <typeAlias alias="AdminCondition" type="com.yh.survey.domain.manager.condition.AdminCondition"/>
+        <typeAlias alias="Res" type="com.yh.survey.domain.manager.pojo.Res"/>
+        <typeAlias alias="ResCondition" type="com.yh.survey.domain.manager.condition.ResCondition"/>
+        <typeAlias alias="Auth" type="com.yh.survey.domain.manager.pojo.Auth"/>
+        <typeAlias alias="AuthCondition" type="com.yh.survey.domain.manager.condition.AuthCondition"/>
+        <typeAlias alias="Role" type="com.yh.survey.domain.manager.pojo.Role"/>
+        <typeAlias alias="RoleCondition" type="com.yh.survey.domain.manager.condition.RoleCondition"/>
     </typeAliases>
 
     <plugins>
@@ -59,6 +65,9 @@
         <mapper resource="mapper/QuestionMapper.xml"/>
         <mapper resource="mapper/AnswerMapper.xml"/>
         <mapper resource="mapper/AdminMapper.xml"/>
+        <mapper resource="mapper/ResMapper.xml"/>
+        <mapper resource="mapper/AuthMapper.xml"/>
+        <mapper resource="mapper/RoleMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -25,4 +25,11 @@ public interface SurveyService {
     Survey getSurveyWithBagAndQuestions(Long id);
 
     Integer updateSurveyComplete(Survey survey);
+
+    /**
+     * 根据surveyId深度删除调查
+     *
+     * @param surveyId 调查id
+     */
+    void deeplyRemove(Long surveyId);
 }
