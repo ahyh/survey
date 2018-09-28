@@ -1,10 +1,13 @@
 package com.yh.survey.manager.controller;
 
 import com.google.common.base.Preconditions;
+import com.yh.survey.consts.ExceptionMessage;
 import com.yh.survey.domain.Result;
 import com.yh.survey.domain.manager.pojo.Admin;
 import com.yh.survey.domain.manager.pojo.Res;
+import com.yh.survey.exceptions.BatchDeleteFailedException;
 import com.yh.survey.manager.service.ResService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -67,5 +70,24 @@ public class ResController {
             result.setErrorMsg(e.getMessage());
         }
         return result;
+    }
+
+    /**
+     * 批量删除资源
+     *
+     * @param resIdList 需要删除的资源id集合
+     * @return 跳转到资源展示页面
+     */
+    @RequestMapping("/batchDelete")
+    public String batchDelete(@RequestParam("resIdList") List<Long> resIdList,HttpSession session) {
+        try {
+            Preconditions.checkArgument(CollectionUtils.isNotEmpty(resIdList), "resIdList cannot empty!");
+            Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
+            resService.batchDelete(resIdList,loginAdmin.getAdminName());
+            return "redirect:/manage/res/showList";
+        } catch (Exception e) {
+            logger.error("ResController batchDelete error:{}", e);
+            throw new BatchDeleteFailedException(ExceptionMessage.BATCH_DELETE_FAILED);
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.yh.survey.dao.ResDao;
 import com.yh.survey.domain.manager.condition.ResCondition;
 import com.yh.survey.domain.manager.pojo.Res;
 import com.yh.survey.manager.service.ResService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,12 +51,18 @@ public class ResServiceImpl implements ResService {
     }
 
     @Override
-    public Byte updatePublicStatus(Long resId,String updateUser) {
+    public Byte updatePublicStatus(Long resId, String updateUser) {
         Preconditions.checkNotNull(resId);
-        resDao.updatePublicStatus(resId,updateUser);
+        resDao.updatePublicStatus(resId, updateUser);
         ResCondition condition = new ResCondition();
         condition.setId(resId);
         Res res = resDao.getResByCondition(condition);
         return res.getPublicStatus();
+    }
+
+    @Override
+    public Integer batchDelete(List<Long> resIdList,String updateUser) {
+        Preconditions.checkArgument(CollectionUtils.isNotEmpty(resIdList), "resIdList cannot empty");
+        return resDao.batchDelete(resIdList,updateUser);
     }
 }

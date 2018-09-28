@@ -28,4 +28,6 @@ public interface ResDao {
     List<Res> findResList();
 
     Integer updatePublicStatus(@Param("resId") Long resId, @Param("updateUser") String updateUser);
+
+    Integer batchDelete(@Param("list") List<Long> list, @Param("updateUser") String updateUser);
 }

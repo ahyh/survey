@@ -144,4 +144,13 @@
         where id = #{resId,jdbcType=BIGINT}
         and is_delete = 0
     </update>
+
+    <update id="batchDelete" parameterType="java.util.List">
+        update res
+        set is_delete = 1,update_time = now(),update_user = #{updateUser,jdbcType=VARCHAR}
+        where id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </update>
 </mapper>

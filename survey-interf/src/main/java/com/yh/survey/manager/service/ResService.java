@@ -42,4 +42,12 @@ public interface ResService {
      */
     Byte updatePublicStatus(Long resId, String updateUser);
 
+    /**
+     * 批量删除res资源
+     *
+     * @param resIdList 需要删除的res的主键集合
+     * @return 删除的资源数量
+     */
+    Integer batchDelete(List<Long> resIdList,String updateUser);
+
 }
