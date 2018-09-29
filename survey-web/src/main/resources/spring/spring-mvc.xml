@@ -51,6 +51,7 @@
                 <prop key="com.yh.survey.exceptions.ExportExcelFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.DeeplyRemoveSurveyFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.BatchDeleteFailedException">error</prop>
+                <prop key="com.yh.survey.exceptions.DispatcherFailedException">error</prop>
             </props>
         </property>
     </bean>

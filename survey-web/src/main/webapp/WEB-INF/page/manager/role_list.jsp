@@ -63,7 +63,7 @@
 								<label for="checkbox${role.id }">点我更轻松</label>
 							</td>
 							<td>
-								<a href="manager/role/toDispatcherUI/${role.id }">分配权限</a>
+								<a href="manage/role/toDispatcher/${role.id }">分配权限</a>
 							</td>
 						</tr>
 					</c:forEach>

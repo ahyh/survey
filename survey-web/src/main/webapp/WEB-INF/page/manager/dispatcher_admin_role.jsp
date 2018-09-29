@@ -12,7 +12,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		[给管理员分配角色]
-		<form action="manager/admin/doDispatcher" method="post">
+		<form action="manage/admin/doDispatcher" method="post">
 			
 			<input type="hidden" name="adminId" value="${requestScope.adminId }"/>
 			
@@ -30,19 +30,19 @@
 						<tr>
 							<td>
 								<!-- 回显的方式是检查当前遍历得到的roleId是否在roleIdList中 -->
-								<input id="checkbox${role.roleId }" 
+								<input id="checkbox${role.id }"
 									   type="checkbox" 
 									   name="roleIdList" 
-									   value="${role.roleId }"
+									   value="${role.id }"
 									   
 										<c:forEach items="${roleIdList }" var="currentRoleId">
-											<c:if test="${currentRoleId==role.roleId }">checked="checked"</c:if>
+											<c:if test="${currentRoleId==role.id }">checked="checked"</c:if>
 										</c:forEach>
 									   
 									   />
 									   
 									   
-								<label for="checkbox${role.roleId }">${role.roleName }</label>
+								<label for="checkbox${role.id }">${role.roleName }</label>
 							</td>
 						</tr>
 						

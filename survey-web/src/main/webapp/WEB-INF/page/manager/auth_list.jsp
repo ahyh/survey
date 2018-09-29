@@ -63,7 +63,7 @@
 								<label for="checkbox${auth.id }">点我更轻松</label>
 							</td>
 							<td>
-								<a href="manager/auth/toDispatcher/${auth.id }">分配资源</a>
+								<a href="manage/auth/toDispatcher/${auth.id }">分配资源</a>
 							</td>
 						</tr>
 					</c:forEach>

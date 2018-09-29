@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class BagUtils {
+public final class BagUtil {
 
     /**
      * 用于参与调查时radio或checkbox回显

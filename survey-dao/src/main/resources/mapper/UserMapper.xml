@@ -91,4 +91,45 @@
         limit 1
     </select>
 
+    <resultMap type="Role" id="deeplyGetRoleResultMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <collection property="authSet" ofType="Auth">
+            <id column="auth_id" property="id" jdbcType="BIGINT"/>
+            <result column="auth_name" property="authName" jdbcType="VARCHAR"/>
+            <collection property="resSet" ofType="Res">
+                <id column="res_id" property="id"/>
+                <result column="servlet_path" property="servletPath"/>
+                <result column="res_code" property="resCode"/>
+                <result column="res_pos" property="resPos"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getRoleSetDeeply" resultMap="deeplyGetRoleResultMap" parameterType="java.lang.Long">
+        SELECT
+        inner_user_role.user_id,
+        role.id,
+        role.role_name,
+        auth.id auth_id,
+        auth.auth_name,
+        res.id res_id,
+        res.servlet_path,
+        res.res_code,
+        res.res_pos
+        FROM inner_user_role
+        LEFT JOIN role ON inner_user_role.role_id = role.id
+        LEFT JOIN inner_role_auth ON role.id = inner_role_auth.role_id
+        LEFT JOIN auth ON inner_role_auth.auth_id = auth.id
+        LEFT JOIN inner_auth_res ON auth.id = inner_auth_res.auth_id
+        LEFT JOIN res ON inner_auth_res.res_id = res.id
+        WHERE inner_user_role.admin_id = #{userId,jdbcType=BIGINT}
+        and inner_user_role.is_delete = 0
+        and role.is_delete = 0
+        and auth.is_delete = 0
+        and res.is_delete = 0
+        and inner_role_auth.is_delete = 0
+        and inner_auth_res.is_delete = 0
+    </select>
+
 </mapper>

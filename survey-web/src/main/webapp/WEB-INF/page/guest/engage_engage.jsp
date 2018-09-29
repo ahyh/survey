@@ -1,4 +1,4 @@
-<%@page import="com.yh.survey.domain.utils.BagUtils" %>
+<%@page import="com.yh.survey.domain.utils.BagUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,7 +53,7 @@
                                        name="q${question.id }"
                                        value="${myStatus.index}"
                                        id="id${question.id }${myStatus.index}"
-                                        <%=BagUtils.checkedRedisplay(pageContext) %>
+                                        <%=BagUtil.checkedRedisplay(pageContext) %>
                                 />
 
                                 <label for="id${question.id }${myStatus.index}">${option }</label>
@@ -68,7 +68,7 @@
                                        name="q${question.id }"
                                        value="${myStatus.index}"
                                        id="id${question.id }${myStatus.index}"
-                                        <%=BagUtils.checkedRedisplay(pageContext) %>
+                                        <%=BagUtil.checkedRedisplay(pageContext) %>
                                 />
                                 <label for="id${question.id }${myStatus.index}">${option }</label>
                             </c:forEach>
@@ -80,7 +80,7 @@
                             <input type="text"
                                    name="q${question.id }"
                                    class="longInput"
-                                   value="<%=BagUtils.valueRedisplay(pageContext) %>"/>
+                                   value="<%=BagUtil.valueRedisplay(pageContext) %>"/>
 
                         </c:if>
 

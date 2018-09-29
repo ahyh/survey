@@ -13,7 +13,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		分配资源
-		<form action="manager/auth/dispatcher" method="post">
+		<form action="manage/auth/dispatcher" method="post">
 			<input type="hidden" name="authId" value="${authId }"/>
 			<table class="dataTable">
 				<c:if test="${empty resList }">
@@ -25,12 +25,12 @@
 					<c:forEach items="${resList }" var="res">
 						<tr>
 							<td>
-								<input id="checkbox${res.resId }" type="checkbox" name="resIdList" value="${res.resId }"
+								<input id="checkbox${res.id }" type="checkbox" name="resIdList" value="${res.id }"
 									<c:forEach items="${currentIdList }" var="currentId">
-										<c:if test="${currentId==res.resId }">checked="checked"</c:if>
+										<c:if test="${currentId==res.id }">checked="checked"</c:if>
 									</c:forEach>
 								/>
-								<label for="checkbox${res.resId }">${res.servletPath }</label>
+								<label for="checkbox${res.id }">${res.servletPath }</label>
 							</td>
 						</tr>
 					</c:forEach>

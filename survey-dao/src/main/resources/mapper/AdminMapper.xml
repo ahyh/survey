@@ -46,6 +46,9 @@
                 <if test="password != null and password != ''">
                     password = #{password,jdbcType=VARCHAR},
                 </if>
+                <if test="codeArray != null and codeArray != ''">
+                    code_array = #{codeArray,jdbcType=VARCHAR},
+                </if>
             </trim>
         </set>
         where id =#{id,jdbcType=BIGINT}
@@ -104,6 +107,74 @@
                 </otherwise>
             </choose>
         </where>
+    </select>
+
+    <select id="findCurrentRoleIdList" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select role_id
+        from inner_admin_role
+        where admin_id = #{adminId,jdbcType=BIGINT} and is_delete = 0
+    </select>
+
+    <delete id="deleteByAdminId" parameterType="java.lang.Long">
+        delete from inner_admin_role where admin_id = #{adminId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="batchInsertAdminRoleShip" parameterType="java.util.List">
+        insert into inner_admin_role
+        (admin_id,role_id,create_time,update_time,create_user,update_user,is_delete)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.adminId,jdbcType=BIGINT},
+                #{item.roleId,jdbcType=BIGINT},
+                now(),
+                now(),
+                #{item.createUser,jdbcType=VARCHAR},
+                #{item.createUser,jdbcType=VARCHAR},
+                0
+            </trim>
+        </foreach>
+    </insert>
+
+    <resultMap type="Role" id="deeplyGetRoleResultMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <collection property="authSet" ofType="Auth">
+            <id column="auth_id" property="id" jdbcType="BIGINT"/>
+            <result column="auth_name" property="authName" jdbcType="VARCHAR"/>
+            <collection property="resSet" ofType="Res">
+                <id column="res_id" property="id"/>
+                <result column="servlet_path" property="servletPath"/>
+                <result column="res_code" property="resCode"/>
+                <result column="res_pos" property="resPos"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getRoleSetDeeply" resultMap="deeplyGetRoleResultMap" parameterType="java.lang.Long">
+        SELECT
+        inner_admin_role.admin_id,
+        role.id,
+        role.role_name,
+        auth.id auth_id,
+        auth.auth_name,
+        res.id res_id,
+        res.servlet_path,
+        res.res_code,
+        res.res_pos
+        FROM inner_admin_role
+        LEFT JOIN role ON inner_admin_role.role_id = role.id
+        LEFT JOIN inner_role_auth ON role.id = inner_role_auth.role_id
+        LEFT JOIN auth ON inner_role_auth.auth_id = auth.id
+        LEFT JOIN inner_auth_res ON auth.id = inner_auth_res.auth_id
+        LEFT JOIN res ON inner_auth_res.res_id = res.id
+        WHERE inner_admin_role.admin_id = #{adminId,jdbcType=BIGINT}
+        and inner_admin_role.is_delete = 0
+        and role.is_delete = 0
+        and auth.is_delete = 0
+        and res.is_delete = 0
+        and inner_role_auth.is_delete = 0
+        and inner_auth_res.is_delete = 0
     </select>
 
 </mapper>

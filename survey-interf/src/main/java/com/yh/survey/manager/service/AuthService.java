@@ -10,5 +10,15 @@ public interface AuthService {
 
     Integer saveAuth(Auth auth);
 
-    Integer batchDelete(List<Long> authIdList,String updateUser);
+    Integer batchDelete(List<Long> authIdList, String updateUser);
+
+    /**
+     * 根据authId查询相关联的resId的集合
+     *
+     * @param authId authid
+     * @return resId集合
+     */
+    List<Long> findCurrentResIdList(Long authId);
+
+    Integer updateAuthResShip(Long authId, List<Long> resIdList, String adminName);
 }

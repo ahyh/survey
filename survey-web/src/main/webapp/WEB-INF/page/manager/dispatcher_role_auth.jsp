@@ -13,7 +13,7 @@
 	
 	<div id="mainDiv" class="borderDiv">
 		分配权限
-		<form action="manager/role/dispatcher" method="post">
+		<form action="manage/role/dispatcher" method="post">
 			<input type="hidden" name="roleId" value="${roleId }"/>
 			<table class="dataTable">
 				<c:if test="${empty authList }">
@@ -25,12 +25,12 @@
 					<c:forEach items="${authList }" var="auth">
 						<tr>
 							<td>
-								<input id="checkbox${auth.authId }" type="checkbox" name="authIdList" value="${auth.authId }"
+								<input id="checkbox${auth.id }" type="checkbox" name="authIdList" value="${auth.id }"
 									<c:forEach items="${currentAuthIdList }" var="currentAuthId">
-										<c:if test="${currentAuthId==auth.authId }">checked="checked"</c:if>
+										<c:if test="${currentAuthId==auth.id }">checked="checked"</c:if>
 									</c:forEach>
 								/>
-								<label for="checkbox${auth.authId }">${auth.authName }</label>
+								<label for="checkbox${auth.id }">${auth.authName }</label>
 							</td>
 						</tr>
 					</c:forEach>
