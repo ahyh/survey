@@ -2,12 +2,18 @@ package com.yh.survey.guest.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.yh.survey.consts.ExceptionMessage;
+import com.yh.survey.dao.ResDao;
+import com.yh.survey.dao.RoleDao;
 import com.yh.survey.dao.UserDao;
 import com.yh.survey.domain.guest.condition.UserCondition;
 import com.yh.survey.domain.guest.pojo.User;
+import com.yh.survey.domain.manager.condition.RoleCondition;
+import com.yh.survey.domain.manager.pojo.Role;
+import com.yh.survey.enums.UserTypeEnum;
 import com.yh.survey.exceptions.UserLoginFailedException;
 import com.yh.survey.exceptions.UserNameAlreadyExistsException;
 import com.yh.survey.guest.interf.UserService;
+import com.yh.survey.manager.UserManager;
 import com.yh.survey.utils.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -25,6 +31,15 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private RoleDao roleDao;
+
+    @Resource
+    private ResDao resDao;
+
+    @Resource
+    private UserManager userManager;
 
     /**
      * 注册
@@ -50,10 +65,20 @@ public class UserServiceImpl implements UserService {
         user.setCreateUser(user.getUsername());
         //密码加密
         user.setPassword(MD5Util.md5(user.getPassword()));
-        if (userDao.insert(user) == 1) {
-            return true;
+        //i.判断用户的类别
+        Byte userType = user.getUserType();
+        //ii.根据用户类别查询对应的Role对象
+        String roleName;
+        if (userType.equals(UserTypeEnum.COMPANY.getKey())) {
+            roleName = "企业用户";
+        } else {
+            roleName = "个人用户";
         }
-        return false;
+        RoleCondition roleCondition = new RoleCondition();
+        roleCondition.setRoleName(roleName);
+        Role role = roleDao.getRoleByCondition(roleCondition);
+        userManager.saveUserWithCodeArray(user, role);
+        return true;
     }
 
     /**

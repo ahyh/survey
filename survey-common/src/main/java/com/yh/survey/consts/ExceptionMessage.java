@@ -25,4 +25,5 @@ public final class ExceptionMessage {
     public static final String BATCH_DELETE_FAILED = "批量删除异常!";
     public static final String DISPATCHER_FAILED = "分配权限出现异常";
     public static final String HAS_NOT_AUTHORITY = "抱歉，您没有操作权限！";
+    public static final String REGISTER_FAILED = "抱歉，注册失败!";
 }
