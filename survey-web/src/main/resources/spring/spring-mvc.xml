@@ -52,6 +52,7 @@
                 <prop key="com.yh.survey.exceptions.DeeplyRemoveSurveyFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.BatchDeleteFailedException">error</prop>
                 <prop key="com.yh.survey.exceptions.DispatcherFailedException">error</prop>
+                <prop key="com.yh.survey.exceptions.HasNotAuthorityException">error</prop>
             </props>
         </property>
     </bean>
@@ -97,13 +98,17 @@
     <!-- 拦截器 -->
     <mvc:interceptors>
         <!-- 多个拦截器，顺序执行 -->
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.yh.survey.interceptors.LoginInterceptor"></bean>
-        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.yh.survey.interceptors.LoginInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.yh.survey.interceptors.ResInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yh.survey.interceptors.AuthorityInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 

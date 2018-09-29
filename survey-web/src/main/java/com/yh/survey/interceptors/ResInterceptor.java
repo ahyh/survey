@@ -3,6 +3,7 @@ package com.yh.survey.interceptors;
 import com.google.common.base.Preconditions;
 import com.yh.survey.domain.manager.condition.ResCondition;
 import com.yh.survey.domain.manager.pojo.Res;
+import com.yh.survey.domain.utils.AuthUtil;
 import com.yh.survey.manager.service.ResService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -24,7 +25,7 @@ public class ResInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         String servletPath = request.getServletPath();
-        servletPath = getPath(servletPath);
+        servletPath = AuthUtil.getPath(servletPath);
         ResCondition condition = new ResCondition();
         condition.setServletPath(servletPath);
         Res res = resService.getResByCondition(condition);
@@ -58,12 +59,4 @@ public class ResInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    private String getPath(String servletPath) {
-        Preconditions.checkArgument(StringUtils.isNotBlank(servletPath), "servletPath cannot blank");
-        String[] splitStrs = servletPath.split("/");
-        if (splitStrs.length <= 4) {
-            return servletPath;
-        }
-        return "/" + splitStrs[1] + "/" + splitStrs[2] + "/" + splitStrs[3];
-    }
 }
