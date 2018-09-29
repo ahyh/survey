@@ -68,7 +68,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
         }
 
         //14.如果当前请求的目标地址是Admin部分的
-        if (servletPath.startsWith("/manager")) {
+        if (servletPath.startsWith("/manage")) {
             //15.检查Admin是否登录
             Admin admin = (Admin) session.getAttribute("loginAdmin");
             //16.如果没有登录则抛出自定义异常：AdminLoginNeededException

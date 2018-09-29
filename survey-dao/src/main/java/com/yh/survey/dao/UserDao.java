@@ -28,4 +28,6 @@ public interface UserDao {
     Set<Role> getRoleSetDeeply(Long userId);
 
     Integer batchInsertUserRoleShip(@Param("list") List<UserRoleShip> userRoleShipList);
+
+    List<User> findUserList();
 }

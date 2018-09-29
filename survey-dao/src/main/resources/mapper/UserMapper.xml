@@ -157,4 +157,38 @@
         </foreach>
     </insert>
 
+    <select id="findUserList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="allColumns"/>
+        from user
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="userNo != null and userNo != ''">
+                and user_no = #{userNo,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="userType != null">
+                and user_type = #{userType,jdbcType=TINYINT}
+            </if>
+            <if test="codeArray != null and codeArray != ''">
+                and code_array = #{codeArray,jdbcType=VARCHAR}
+            </if>
+            <choose>
+                <when test="isDelete != null">
+                    and is_delete = #{isDelete,jdbcType=TINYINT}
+                </when>
+                <otherwise>
+                    and is_delete = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
 </mapper>

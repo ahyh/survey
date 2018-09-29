@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+
+	<description>yanhuan Core library</description>
+	<display-name>yanhuan core</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>yanhuan</short-name>
+	<uri>http://www.yanhuan.com/myTag</uri>
+	
+	<tag>
+		<name>auth</name>
+		<tag-class>com.yh.survey.tag.AuthTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>servletPath</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>

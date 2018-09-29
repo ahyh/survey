@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib uri="http://www.atguigu.com/myTag" prefix="atguigu" %>--%>
+<%@ taglib uri="http://www.yanhuan.com/myTag" prefix="yanhuan" %>
 <div id="logoDiv" class="borderDiv">XXX在线调查系统后台</div>
 <div id="topDiv" class="borderDiv">
 	
@@ -13,37 +13,37 @@
 		[欢迎您，${sessionScope.loginAdmin.adminName }]
 		[<a href="manage/admin/logout">退出登录</a>]
 		
-		<%--<atguigu:auth servletPath="manager/statistics/showAllAvailable">--%>
+		<yanhuan:auth servletPath="manage/statistics/showAllAvailable">
 			[<a href="manage/statistics/showAllAvailable">统计调查</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/res/showList">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/res/showList">
 			[<a href="manage/res/showList">资源列表</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/auth/toAddUI">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/auth/toAdd">
 			[<a href="manage/auth/toAdd">创建权限</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/auth/showList">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/auth/showList">
 			[<a href="manage/auth/showList">权限列表</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/role/toAddUI">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/role/toAdd">
 			[<a href="manage/role/toAdd">创建角色</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/role/showList">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/role/showList">
 			[<a href="manage/role/showList">角色列表</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/admin/toAddUI">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/admin/toAdd">
 			[<a href="manage/admin/toAdd">创建账号</a>]
-		<%--</atguigu:auth>--%>
-		<%----%>
-		<%--<atguigu:auth servletPath="manager/admin/showList">--%>
+		</yanhuan:auth>
+
+		<yanhuan:auth servletPath="manage/admin/showList">
 			[<a href="manage/admin/showList">账号列表</a>]
-		<%--</atguigu:auth>--%>
+		</yanhuan:auth>
 		
 		[<a href="manage/log/showList">日志列表</a>]
 	
