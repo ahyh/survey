@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.survey.dao.LogDao">
+    <resultMap id="BaseResultMap" type="Log">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP"/>
+        <result column="method_name" property="methodName" jdbcType="VARCHAR"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="input_data" property="inputData" jdbcType="VARCHAR"/>
+        <result column="output_data" property="outputData" jdbcType="VARCHAR"/>
+        <result column="exception_type" property="exceptionType" jdbcType="VARCHAR"/>
+        <result column="exception_message" property="exceptionMessage" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="allColumnsWithOutId">
+        (operator,operator_time,method_name,type_name,input_data,output_data,exception_type,exception_message)
+    </sql>
+
+    <sql id="allColumns">
+        id,operator,operator_time,method_name,type_name,input_data,output_data,exception_type,exception_message
+    </sql>
+
+    <!-- 插入方法，插入后返回主键-->
+    <insert id="insert" parameterType="Log" useGeneratedKeys="true" keyProperty="id">
+        insert into log
+        <include refid="allColumnsWithOutId"/>
+        values (
+        #{operator,jdbcType=VARCHAR},
+        #{operatorTime,jdbcType=TIMESTAMP},
+        #{methodName,jdbcType=VARCHAR},
+        #{typeName,jdbcType=VARCHAR},
+        #{inputData,jdbcType=VARCHAR},
+        #{outputData,jdbcType=VARCHAR},
+        #{exceptionType,jdbcType=VARCHAR},
+        #{exceptionMessage,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="getLogByCondition" resultMap="BaseResultMap" parameterType="LogCondition" useCache="true">
+        SELECT
+        <include refid="allColumns"/>
+        from log
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator,jdbcType=VARCHAR}
+            </if>
+            <if test="operatorTime != null and operatorTime != ''">
+                and operator_time = #{operatorTime,jdbcType=VARCHAR}
+            </if>
+            <if test="methodName != null and methodName != ''">
+                and method_name = #{methodName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeName != null and typeName != ''">
+                and type_name = #{typeName,jdbcType=VARCHAR}
+            </if>
+            <if test="inputData != null and inputData != ''">
+                and input_data = #{inputData,jdbcType=VARCHAR}
+            </if>
+            <if test="outputData != null and outputData != ''">
+                and output_data = #{outputData,jdbcType=VARCHAR}
+            </if>
+            <if test="exceptionType != null and exceptionType != ''">
+                and exception_type = #{exceptionType,jdbcType=VARCHAR}
+            </if>
+            <if test="exceptionMessage != null and exceptionMessage != ''">
+                and exception_message = #{exceptionMessage,jdbcType=VARCHAR}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="findLogList" resultMap="BaseResultMap" parameterType="LogCondition">
+        SELECT
+        <include refid="allColumns"/>
+        from log
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator,jdbcType=VARCHAR}
+            </if>
+            <if test="operatorTime != null and operatorTime != ''">
+                and operator_time = #{operatorTime,jdbcType=VARCHAR}
+            </if>
+            <if test="methodName != null and methodName != ''">
+                and method_name = #{methodName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeName != null and typeName != ''">
+                and type_name = #{typeName,jdbcType=VARCHAR}
+            </if>
+            <if test="inputData != null and inputData != ''">
+                and input_data = #{inputData,jdbcType=VARCHAR}
+            </if>
+            <if test="outputData != null and outputData != ''">
+                and output_data = #{outputData,jdbcType=VARCHAR}
+            </if>
+            <if test="exceptionType != null and exceptionType != ''">
+                and exception_type = #{exceptionType,jdbcType=VARCHAR}
+            </if>
+            <if test="exceptionMessage != null and exceptionMessage != ''">
+                and exception_message = #{exceptionMessage,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>

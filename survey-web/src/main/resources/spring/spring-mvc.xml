@@ -105,6 +105,10 @@
         <!--</mvc:interceptor>-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <bean class="com.yh.survey.interceptors.RequestBindInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
             <bean class="com.yh.survey.interceptors.ResInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>

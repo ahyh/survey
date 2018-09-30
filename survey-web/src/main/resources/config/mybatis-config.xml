@@ -42,6 +42,8 @@
         <typeAlias alias="AuthCondition" type="com.yh.survey.domain.manager.condition.AuthCondition"/>
         <typeAlias alias="Role" type="com.yh.survey.domain.manager.pojo.Role"/>
         <typeAlias alias="RoleCondition" type="com.yh.survey.domain.manager.condition.RoleCondition"/>
+        <typeAlias alias="Log" type="com.yh.survey.domain.log.pojo.Log"/>
+        <typeAlias alias="LogCondition" type="com.yh.survey.domain.log.condition.LogCondition"/>
     </typeAliases>
 
     <plugins>
@@ -68,6 +70,7 @@
         <mapper resource="mapper/ResMapper.xml"/>
         <mapper resource="mapper/AuthMapper.xml"/>
         <mapper resource="mapper/RoleMapper.xml"/>
+        <mapper resource="mapper/LogMapper.xml"/>
     </mappers>
 
 </configuration>

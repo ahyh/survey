@@ -6,9 +6,6 @@ import com.yh.survey.domain.manager.pojo.Admin;
 import com.yh.survey.domain.manager.pojo.Res;
 import com.yh.survey.domain.utils.AuthUtil;
 import com.yh.survey.manager.service.ResService;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
