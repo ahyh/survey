@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="firstComplexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.yh.survey.log.quartz.LogCreateJob"/>
+        <property name="durability" value="true"/>
+        <!-- 注入需要的组件 -->
+        <property name="jobDataMap">
+            <map>
+                <entry key="logService" value-ref="logServiceImpl"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--
+    克隆表达式写法
+    二、Cron表达式详解
+	1.基本格式
+		用空格分开的7个部分，按顺序依次为
+		①秒：0~59
+		②分钟：0~59
+		③小时：0~23
+		④日期：0~31，但是需要考虑月的实际天数 day-of-month
+		⑤月：0~11
+		⑥星期：1~7（1为星期日）或SUN，MON，TUE，WED，THU，FRI，SAT day-of-week
+		⑦年份：1970~2099可选
+	2.设置方式
+		①指定具体值：5
+		②连续区间：9-12
+		③有间隔的区间：8-18/4
+			斜杠后面为间隔跨度
+		④具体值的列表：1,3,5
+		⑤通配符
+			[1]*：表示在取值范围内的所有时间点都执行调度任务
+				例如：用*指定秒，表示每秒都执行任务；用*指定星期表示一周内的每一天都执行任务
+			[2]/：用于表示时间间隔
+				例如：用*/5指定秒，表示每隔5秒执行一次任务
+			[3]?：仅被用于day-of-month字段或day-of-week字段，表示不指定值。由于某个月的几号和星期几很难统一成同一天。所以为了避免冲突，day-of-month或day-of-week中的其中一个设置了具体的值（注意：*也是具体值，因为*表示取值范围内所有值）后，另一个就必须设置为问号
+			[4]L：仅被用于day-of-month字段或day-of-week字段，表示一个月或一个星期的最后一天，是单词Last的缩写。如果L前面有数字则表示不同含义。例如：“6L”表示这个月的倒数第6天，“FRIL”表示这个月的最一个星期五。注意：在使用“L”参数时，不要指定列表或范围，这会导致问题。
+			[5]W("weekday")：只能用在day-of-month字段。用来描叙最接近指定天的工作日：周一到周五。例如：在day-of-month字段用“15W”指“最接近这个月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日。
+			[6]#：只能用在day-of-week字段。用来指定这个月的第几个周几。例：在day-of-week字段用"6#3"指这个月第3个周五（6指周五，3指第3个）。如果指定的日期不存在，触发器就不会触发。
+			[7]C：指和calendar联系后计算过的值。例：在day-of-month字段用“5C”指在这个月第5天或之后包括calendar的第一天；在day-of-week字段用“1C”指在这周日或之后包括calendar的第一天。
+	3.示例
+		表达式											说明
+		=======================================================
+		秒	分		时		日	月	星期	年
+		0 	0		12		*	*	?					每天中午12点触发
+		0	15		10		?	*	*					每天上午10:15触发
+		0	15		10		*	*	?					每天上午10:15触发
+		0	15		10		*	*	?		*			每天上午10:15触发
+		0	15		10		*	*	?		2005		2005年的每天上午10:15触发
+		0	*		14		*	*	?					在每天下午2点到下午2:59期间的每1分钟触发
+		0	0/5		14		*	*	?					在每天下午2点到下午2:55期间的每5分钟触发
+		0	0/5		14,18	*	*	?					在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发
+		0	0-5		14		*	*	?					在每天下午2点到下午2:05期间的每1分钟触发
+		0	10,44	14		?	3	WED					每年四月的星期三的下午2:10和2:44触发
+		0	15		10		?	*	MON-FRI				周一至周五的上午10:15触发
+		0	15		10		15	*	?					每月15日上午10:15触发
+		0	15		10		L	*	?					每月最后一日的上午10:15触发
+		0	15		10		?	*	6L					每月的最后一个星期五上午10:15触发
+		0	15		10		?	*	6L		2002-2005	2002年至2005年的每月的最后一个星期五上午10:15触发
+		0	15		10		?	*	6#3					每月的第三个星期五上午10:15触发
+
+    -->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="firstComplexJobDetail"/>
+        <property name="cronExpression" value="0 0 0 15 * ?"/>
+    </bean>
+
+    <bean id="simpleScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="firstComplexJobDetail"></ref>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>
