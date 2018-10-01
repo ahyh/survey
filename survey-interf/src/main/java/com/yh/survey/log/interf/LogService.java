@@ -10,4 +10,6 @@ public interface LogService {
     Integer saveLog(Log log);
 
     List<Log> findLogList(LogCondition condition);
+
+    Integer createTable(Integer offset);
 }

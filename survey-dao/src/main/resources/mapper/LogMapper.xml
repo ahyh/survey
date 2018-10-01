@@ -108,4 +108,8 @@
         </where>
     </select>
 
+    <update id="createTable" parameterType="java.lang.String">
+        create table if not EXISTS ${tableName} like survey.log;
+    </update>
+
 </mapper>

@@ -16,7 +16,8 @@
                                   execution(* *..*Service.delete*(..)) or
                                   execution(* *..*Service.register(..)) or
                                   execution(* *..*Service.do*(..)) or
-                                  execution(* *..*Service.deeply*(..))) and
+                                  execution(* *..*Service.deeply*(..)) or
+                                  execution(* *..*Service.create*(..)))  and
                                   !bean(logServiceImpl)" id="mypoint"/>
         <aop:aspect ref="logAspect" order="1">
             <aop:around method="recordLog" pointcut-ref="mypoint"/>
