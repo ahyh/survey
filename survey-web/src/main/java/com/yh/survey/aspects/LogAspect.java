@@ -7,9 +7,6 @@ import com.yh.survey.log.RequestBinder;
 import com.yh.survey.log.interf.LogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +37,7 @@ public class LogAspect {
             //i.尝试获取当前异常的原因
             Throwable cause = e.getCause();
             //ii.判断cause是否为null
-            while(cause != null) {
+            while (cause != null) {
                 //iii.获取原因的异常信息
                 exceptionType = cause.getClass().getName();
                 exceptionMessage = cause.getMessage();
@@ -56,10 +53,10 @@ public class LogAspect {
             //从session对象中获取登录的Admin和User
             User user = (User) session.getAttribute("loginUser");
             Admin admin = (Admin) session.getAttribute("loginAdmin");
-            String userPart = (user == null)? "user未登录" : user.getUsername();
-            String adminPart = (admin == null)? "admin未登录" : admin.getAdminName();
+            String userPart = (user == null) ? "user未登录" : user.getUsername();
+            String adminPart = (admin == null) ? "admin未登录" : admin.getAdminName();
             String operator = userPart + "/" + adminPart;
-            String outputData = (targetReturnValue == null)? "无返回值" : targetReturnValue.toString();
+            String outputData = (targetReturnValue == null) ? "无返回值" : targetReturnValue.toString();
             Log log = new Log();
             log.setOperator(operator);
             log.setOperatorTime(new Date());

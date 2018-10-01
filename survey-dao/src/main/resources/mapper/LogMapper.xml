@@ -22,18 +22,18 @@
     </sql>
 
     <!-- 插入方法，插入后返回主键-->
-    <insert id="insert" parameterType="Log" useGeneratedKeys="true" keyProperty="id">
-        insert into log
+    <insert id="insert" parameterType="Log">
+        insert into ${tableName}
         <include refid="allColumnsWithOutId"/>
         values (
-        #{operator,jdbcType=VARCHAR},
-        #{operatorTime,jdbcType=TIMESTAMP},
-        #{methodName,jdbcType=VARCHAR},
-        #{typeName,jdbcType=VARCHAR},
-        #{inputData,jdbcType=VARCHAR},
-        #{outputData,jdbcType=VARCHAR},
-        #{exceptionType,jdbcType=VARCHAR},
-        #{exceptionMessage,jdbcType=VARCHAR}
+        #{log.operator,jdbcType=VARCHAR},
+        #{log.operatorTime,jdbcType=TIMESTAMP},
+        #{log.methodName,jdbcType=VARCHAR},
+        #{log.typeName,jdbcType=VARCHAR},
+        #{log.inputData,jdbcType=VARCHAR},
+        #{log.outputData,jdbcType=VARCHAR},
+        #{log.exceptionType,jdbcType=VARCHAR},
+        #{log.exceptionMessage,jdbcType=VARCHAR}
         )
     </insert>
 

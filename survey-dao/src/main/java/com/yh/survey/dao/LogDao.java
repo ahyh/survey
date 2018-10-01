@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface LogDao {
 
-    Integer insert(Log log);
+    Integer insert(@Param("log") Log log, @Param("tableName") String tableName);
 
     Log getLogByCondition(LogCondition condition);
 

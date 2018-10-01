@@ -25,7 +25,10 @@ public class LogServiceImpl implements LogService {
     @Override
     public Integer saveLog(Log log) {
         Preconditions.checkNotNull(log);
-        return logDao.insert(log);
+        //1-获取当月的表名
+        String tableName = LogTableNameUtil.getTableName(0);
+        //2-将当月的日志写入到当月的表中
+        return logDao.insert(log, tableName);
     }
 
     @Override
