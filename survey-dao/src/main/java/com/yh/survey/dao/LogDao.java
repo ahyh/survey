@@ -21,4 +21,10 @@ public interface LogDao {
 
     Integer createTable(@Param("tableName") String tableName);
 
+    List<String> findAllTableNameList();
+
+    Integer queryAllLogCount(@Param("list") List<String> tableNames);
+
+    List<Log> getLimitedLogList(LogCondition condition);
+
 }

@@ -31,10 +31,10 @@
 				<c:forEach items="${page.list }" var="log">
 					
 					<tr>
-						<td>${log.logId }</td>
+						<td>${log.id }</td>
 						<td>
 							操作人：${log.operator }<br/>
-							操作时间：${log.operateTime }<br/>
+							操作时间：${log.operatorTime }<br/>
 							方法名：${log.methodName }<br/>
 							类型名：${log.typeName }<br/>
 							输入数据：${log.inputData }<br/>
@@ -48,7 +48,7 @@
 				
 				<tr>
 					<td colspan="2">
-						<c:set var="targetUrl" value="manager/log/showList"/>
+						<c:set var="targetUrl" value="manage/log/showList"/>
 						<%@include file="/res_jsp/navigator.jsp" %>
 					</td>
 				</tr>

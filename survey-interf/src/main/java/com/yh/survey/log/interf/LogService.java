@@ -1,5 +1,6 @@
 package com.yh.survey.log.interf;
 
+import com.github.pagehelper.PageInfo;
 import com.yh.survey.domain.log.condition.LogCondition;
 import com.yh.survey.domain.log.pojo.Log;
 
@@ -12,4 +13,8 @@ public interface LogService {
     List<Log> findLogList(LogCondition condition);
 
     Integer createTable(Integer offset);
+
+    PageInfo<Log> findLogPage(LogCondition condition);
+
+    List<String> findAllTableNameList();
 }

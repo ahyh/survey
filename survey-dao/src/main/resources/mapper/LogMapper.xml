@@ -109,7 +109,40 @@
     </select>
 
     <update id="createTable" parameterType="java.lang.String">
-        create table if not EXISTS ${tableName} like survey.log;
+        create table if not EXISTS ${tableName} like log.log;
     </update>
+
+    <select id="findAllTableNameList" resultType="java.lang.String">
+        SELECT TABLE_NAME FROM `information_schema`.TABLES WHERE TABLE_SCHEMA='log'
+    </select>
+
+    <!-- 查询日志数量 -->
+    <select id="queryAllLogCount" parameterType="java.util.List" resultType="java.lang.Integer">
+        select count(*) from
+        <foreach collection="list"
+                 item="item"
+                 open="(" close=") log_alias"
+                 separator=" UNION ">
+            SELECT * FROM ${item}
+        </foreach>
+    </select>
+
+    <select id="getLimitedLogList" resultMap="BaseResultMap" parameterType="LogCondition">
+        select id,
+        operator,
+        operator_time,
+        method_name,
+        type_name,
+        input_data,
+        output_data,
+        exception_type,
+        exception_message from
+        <foreach collection="tableNames"
+                 item="tableName"
+                 open="(" close=") log_alias"
+                 separator=" UNION ">
+            SELECT * FROM ${tableName}
+        </foreach>
+    </select>
 
 </mapper>

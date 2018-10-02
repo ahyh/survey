@@ -2,6 +2,7 @@ package com.yh.survey.domain.log.condition;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class LogCondition implements Serializable {
 
@@ -49,6 +50,14 @@ public class LogCondition implements Serializable {
      * 异常信息
      */
     private String exceptionMessage;
+
+    private int pageNum;
+
+    private int pageSize;
+
+    private String orderBy;
+
+    List<String> tableNames;
 
     public Long getId() {
         return id;
@@ -120,5 +129,37 @@ public class LogCondition implements Serializable {
 
     public void setExceptionMessage(String exceptionMessage) {
         this.exceptionMessage = exceptionMessage;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public List<String> getTableNames() {
+        return tableNames;
+    }
+
+    public void setTableNames(List<String> tableNames) {
+        this.tableNames = tableNames;
     }
 }
