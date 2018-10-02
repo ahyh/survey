@@ -1,5 +1,6 @@
 package com.yh.survey.log.listeners;
 
+import com.yh.survey.log.RoutingKeyBinder;
 import com.yh.survey.log.interf.LogService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -24,10 +25,17 @@ public class LogCreateTableListener implements ApplicationListener<ContextRefres
         //2-获取applicationContext的父容器
         ApplicationContext parent = applicationContext.getParent();
         //3-判断是否为Spring容器,parent为null,说明为Spring容器
-        if(parent == null){
+        if (parent == null) {
+            /**
+             * 由于数据源绑定器在提交事务后就移除了，所以在每一次开启事务前都需要绑定一次
+             */
+            RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
             logService.createTable(0);
+            RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
             logService.createTable(1);
+            RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
             logService.createTable(2);
+            RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
             logService.createTable(3);
         }
     }

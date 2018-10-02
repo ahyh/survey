@@ -480,6 +480,7 @@
       <properties>
         <mvn.jdbc.mysql.Driver>com.mysql.jdbc.Driver</mvn.jdbc.mysql.Driver>
         <mvn.jdbc.mysql.url>jdbc:mysql://localhost:3306/survey?unicode=utf8</mvn.jdbc.mysql.url>
+        <mvn.jdbc.mysql.log.url>jdbc:mysql://localhost:3306/log?unicode=utf8</mvn.jdbc.mysql.log.url>
         <mvn.jdbc.mysql.username>root</mvn.jdbc.mysql.username>
         <mvn.jdbc.mysql.password>123456</mvn.jdbc.mysql.password>
         <mvn.log.business.level>INFO</mvn.log.business.level>
@@ -499,6 +500,7 @@
       <properties>
         <mvn.jdbc.mysql.Driver>com.mysql.jdbc.Driver</mvn.jdbc.mysql.Driver>
         <mvn.jdbc.mysql.url>jdbc:mysql://localhost:3306/survey?unicode=utf8</mvn.jdbc.mysql.url>
+        <mvn.jdbc.mysql.log.url>jdbc:mysql://localhost:3306/log?unicode=utf8</mvn.jdbc.mysql.log.url>
         <mvn.jdbc.mysql.username>root</mvn.jdbc.mysql.username>
         <mvn.jdbc.mysql.password>123456</mvn.jdbc.mysql.password>
         <mvn.log.business.level>DEBUG</mvn.log.business.level>
@@ -518,6 +520,7 @@
       <properties>
         <mvn.jdbc.mysql.Driver>com.mysql.jdbc.Driver</mvn.jdbc.mysql.Driver>
         <mvn.jdbc.mysql.url>jdbc:mysql://localhost:3306/survey?unicode=utf8</mvn.jdbc.mysql.url>
+        <mvn.jdbc.mysql.log.url>jdbc:mysql://localhost:3306/log?unicode=utf8</mvn.jdbc.mysql.log.url>
         <mvn.jdbc.mysql.username>root</mvn.jdbc.mysql.username>
         <mvn.jdbc.mysql.password>123456</mvn.jdbc.mysql.password>
         <mvn.log.business.level>DEBUG</mvn.log.business.level>

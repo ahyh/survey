@@ -1,5 +1,6 @@
 package com.yh.survey.log.quartz;
 
+import com.yh.survey.log.RoutingKeyBinder;
 import com.yh.survey.log.interf.LogService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -11,13 +12,13 @@ public class LogCreateJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-//        RoutingKeyBinder.bindKey(RoutingKeyBinder.DATASOURCE_LOG);
+        RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
         logService.createTable(1);
 
-//        RoutingKeyBinder.bindKey(RoutingKeyBinder.DATASOURCE_LOG);
+        RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
         logService.createTable(2);
 
-//        RoutingKeyBinder.bindKey(RoutingKeyBinder.DATASOURCE_LOG);
+        RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
         logService.createTable(3);
     }
 

@@ -4,6 +4,7 @@ import com.yh.survey.domain.guest.pojo.User;
 import com.yh.survey.domain.log.pojo.Log;
 import com.yh.survey.domain.manager.pojo.Admin;
 import com.yh.survey.log.RequestBinder;
+import com.yh.survey.log.RoutingKeyBinder;
 import com.yh.survey.log.interf.LogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -66,6 +67,7 @@ public class LogAspect {
             log.setOutputData(outputData);
             log.setExceptionType(exceptionType);
             log.setExceptionMessage(exceptionMessage);
+            RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_LOG);
             logService.saveLog(log);
         }
         //通知方法需要将目标方法的返回值继续返回给外部调用的对象
