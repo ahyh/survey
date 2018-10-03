@@ -162,4 +162,23 @@ public class LogCondition implements Serializable {
     public void setTableNames(List<String> tableNames) {
         this.tableNames = tableNames;
     }
+
+    @Override
+    public String toString() {
+        return "LogCondition{" +
+                "id=" + id +
+                ", operator='" + operator + '\'' +
+                ", operatorTime='" + operatorTime + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", inputData='" + inputData + '\'' +
+                ", outputData='" + outputData + '\'' +
+                ", exceptionType='" + exceptionType + '\'' +
+                ", exceptionMessage='" + exceptionMessage + '\'' +
+                ", pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                ", orderBy='" + orderBy + '\'' +
+                ", tableNames=" + tableNames +
+                '}';
+    }
 }

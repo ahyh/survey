@@ -9,6 +9,7 @@
     <import resource="classpath:spring/spring-aop.xml"/>
     <import resource="classpath:spring/spring-listeners.xml"/>
     <import resource="classpath:spring/spring-quartz.xml"/>
+    <import resource="classpath:spring/spring-ehcache.xml"/>
     <import resource="classpath:spring/spring-mvc.xml"/>
 
 </beans>

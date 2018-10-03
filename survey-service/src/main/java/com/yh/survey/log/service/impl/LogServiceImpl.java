@@ -8,6 +8,7 @@ import com.yh.survey.domain.log.condition.LogCondition;
 import com.yh.survey.domain.log.pojo.Log;
 import com.yh.survey.log.interf.LogService;
 import com.yh.survey.utils.LogTableNameUtil;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,6 +48,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
+    @Cacheable(value = "surveyCache",keyGenerator="surveyCacheKeyGenerator")
     public PageInfo<Log> findLogPage(LogCondition condition) {
         PageHelper.startPage(condition.getPageNum(), condition.getPageSize(), condition.getOrderBy());
         //1.查询总记录数

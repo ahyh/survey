@@ -5,6 +5,7 @@ import com.yh.survey.domain.manager.condition.ResCondition;
 import com.yh.survey.domain.manager.pojo.Admin;
 import com.yh.survey.domain.manager.pojo.Res;
 import com.yh.survey.domain.utils.AuthUtil;
+import com.yh.survey.log.RoutingKeyBinder;
 import com.yh.survey.manager.service.ResService;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -34,6 +35,7 @@ public class AuthTag extends SimpleTagSupport {
     @Override
     public void doTag() throws JspException, IOException {
         //1.准备工作
+        RoutingKeyBinder.setKey(RoutingKeyBinder.DATASOURCE_MAIN);
         PageContext pageContext = (PageContext) getJspContext();
         HttpSession session = pageContext.getSession();
         ServletContext servletContext = pageContext.getServletContext();
